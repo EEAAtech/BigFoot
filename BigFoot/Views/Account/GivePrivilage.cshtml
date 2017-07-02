@@ -1,0 +1,86 @@
+﻿@{
+    ViewBag.Title = "Grant Permissions";
+}
+
+<h1>@ViewBag.Title.</h1>
+<hr />
+<p>&nbsp;</p>
+<h3><u>Users without permissions</u></h3>
+<h4>Click a user name in the appropriate column below to grant permission to that user</h4>
+
+<div class="row">
+    <div class="col-md-4">
+       <h3>Admin</h3>
+        
+        <ul class="nav nav-pills nav-stacked">
+            @foreach (var e in ViewBag.usrs)
+            { 
+                <li><a href="~/Account/SaveRoles/@e.Id?rl=Boss">@e.UserName</a></li>                
+            }
+        </ul>
+    </div>
+    <div class="col-md-4">
+        <h3>HR</h3>
+        
+        <ul class="nav nav-pills nav-stacked">
+            @foreach (var e in ViewBag.usrs)
+            {
+                <li><a href="~/Account/SaveRoles/@e.Id?rl=HR">@e.UserName</a></li>
+            }
+        </ul>
+    </div>
+    <div class="col-md-4">
+        <h3>Others</h3>
+        
+        <ul class="nav nav-pills nav-stacked">
+            @foreach (var e in ViewBag.usrs)
+            {
+                <li><a href="~/Account/SaveRoles/@e.Id?rl=Anon">@e.UserName</a></li>
+            }
+        </ul>
+    </div>
+
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<div class="MastDet">
+    <h3><u>Granted Permissions</u></h3>
+    <h4>Click a user name in the appropriate column below to remove permission for that user</h4>
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Admin</h3>
+            Full access! ( Config, DocTypes, Emp Types, Loans, Wages, Admin)
+            <ul class="nav nav-pills nav-stacked">
+                @foreach (var e in ViewBag.boss)
+                {
+                    <li><a href="~/Account/PurgeRoles/@e.Id?rl=Boss">@e.UserName</a></li>
+                }
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <h3>HR</h3>
+        Access to Advances, Allowance, Attendance,Bonus, Emp Docs, Employees, Loan skip, Emp Histories, Payroll functions, Reports!    
+            <ul class="nav nav-pills nav-stacked">
+                @foreach (var e in ViewBag.hr)
+            {
+                    <li><a href="~/Account/PurgeRoles/@e.Id?rl=hr">@e.UserName</a></li>
+                }
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <h3>Others</h3>
+        Home Page only    
+            <ul class="nav nav-pills nav-stacked">
+                @foreach (var e in ViewBag.anon)
+            {
+                    <li><a href="~/Account/PurgeRoles/@e.Id?rl=Anon">@e.UserName</a></li>
+                }
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

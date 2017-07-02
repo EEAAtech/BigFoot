@@ -1,0 +1,101 @@
+﻿
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a id="emblem" href="~/"><img src="~/Emblem.png" height=100px; alt="Nunes HR System" /> </a>
+            @Html.ActionLink("Nunes HR", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Masters<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="~/Configs/Edit/1">Configuration</a></li>
+                        <li><a href="~/AllowanceTypes">Allowance Types</a></li>
+                        <li><a href="~/EmpTypes">Emp. Types + Allowance</a></li>
+                        <li><a href="~/EDocTypes">Doc. Types</a></li>
+                        <li><a href="~/Account/GivePrivilage">Grant Privilages</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Employee<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="~/Employees">Employees</a></li>                                                
+                        <li><a href="~/Employees/DailyAllow?dt=@DateTime.Today.ToString("dd-MMM-yyyy")">Daily Allowance</a></li>
+                        <li><a href="~/Payrolls/AttendanceRegister" target="_blank">Attendance Register</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Loan<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="~/Loans">Issue Loan</a></li>
+                        @*<li><a href="~/LoanSkips">Skip Loan</a></li>*@
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Payroll<span class="caret"></span></a>
+                    <ul class="dropdown-menu">                        
+                        <li><a href="~/Bonuses">Current Bonus</a></li>
+                        <li><a href="~/Bonuses/OldBonus?yr=@DateTime.Now.Year">Past Bonuses</a></li>
+                        <li><a href="~/Payrolls/Instructions">Payroll Instructions</a></li>
+                        <li><hr /></li>
+                        <li><a href="~/Payrolls/RunPayroll" target="_blank">Run Payroll</a></li>
+                        <li><a href="~/Payrolls/FreezePayroll" target="_blank">Freeze Payroll</a></li>
+                        <li><hr /></li>
+                        <li><a href="~/Payrolls/Adjustment">Payroll Adjustments</a></li>
+                    </ul>
+                </li>
+                
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Reports<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="~/Payrolls/PayRegRq" target="_blank">Pay Register</a></li>
+                        <li><a href="~/Payrolls/PaySlipsMRq" target="_blank">Payslips</a></li>
+                        <li><a href="~/Payrolls/LoanOutstanding" target="_blank">Outstanding Loans</a></li>                        
+                        <li><hr /></li>
+
+                        <li class="dropdown dropdown-submenu">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Export Cat A<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                             
+                                <li class="dropdown dropdown-submenu">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Before Adjustments<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="~/Payrolls/ExportRegEmps" target="_blank">HDFC</a></li>
+                                        <li><a href="~/Payrolls/ExportNonRegEmps" target="_blank">Non HDFC</a></li>
+                                    </ul>
+                                </li>
+
+                                <li class="dropdown dropdown-submenu">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Adjustments<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="~/Payrolls/ExportAdjustmentsHDFCRq" target="_blank">HDFC</a></li>
+                                        <li><a href="~/Payrolls/ExportAdjustmentsNonHDFCRq" target="_blank">Non HDFC</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown dropdown-submenu">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Export Cat B<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="~/Payrolls/ExportTypeBPayRegisterRq" target="_blank">Pay Reg. Before Adjustments</a></li>
+                                <li><a href="~/Payrolls/ExportTypeBPayRegisterAdjRq" target="_blank">Pay Reg. Adjustments</a></li>
+                            </ul>
+                        </li>
+
+                            </ul>
+                        </li>
+
+                    </ul>
+            @Html.Partial("_LoginPartial")
+        </div>
+    </div>
+</div>

@@ -8,10 +8,11 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using BigFoot.Models;
 
+//made in the new NTHR
 namespace BigFoot.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : EAController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;

@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BigFootModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Content">
+          <Key>
+            <PropertyRef Name="ContentID" />
+          </Key>
+          <Property Name="ContentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PageID" Type="int" />
+          <Property Name="ImagPath" Type="varchar" MaxLength="50" />
+          <Property Name="Position" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="ContentTypes">
+          <Key>
+            <PropertyRef Name="ContentTypeID" />
+          </Key>
+          <Property Name="ContentTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContentType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PreHTML" Type="varchar" MaxLength="300" />
+          <Property Name="PostHTML" Type="varchar" MaxLength="300" />
+          <Property Name="UserCss" Type="varchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="Pages">
+          <Key>
+            <PropertyRef Name="PageID" />
+          </Key>
+          <Property Name="PageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Page" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="UserData">
+          <Key>
+            <PropertyRef Name="UDID" />
+          </Key>
+          <Property Name="UDID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContentID" Type="int" />
+          <Property Name="ContentTypeID" Type="int" />
+          <Property Name="Udata" Type="varchar" MaxLength="300" />
+        </EntityType>
+        <Association Name="FK_Content_ToPages">
+          <End Role="Pages" Type="Self.Pages" Multiplicity="0..1" />
+          <End Role="Content" Type="Self.Content" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pages">
+              <PropertyRef Name="PageID" />
+            </Principal>
+            <Dependent Role="Content">
+              <PropertyRef Name="PageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserData_ToContent">
+          <End Role="Content" Type="Self.Content" Multiplicity="0..1" />
+          <End Role="UserData" Type="Self.UserData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Content">
+              <PropertyRef Name="ContentID" />
+            </Principal>
+            <Dependent Role="UserData">
+              <PropertyRef Name="ContentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserData_ToContentType">
+          <End Role="ContentTypes" Type="Self.ContentTypes" Multiplicity="0..1" />
+          <End Role="UserData" Type="Self.UserData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContentTypes">
+              <PropertyRef Name="ContentTypeID" />
+            </Principal>
+            <Dependent Role="UserData">
+              <PropertyRef Name="ContentTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BigFootModelStoreContainer">
+          <EntitySet Name="Content" EntityType="Self.Content" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContentTypes" EntityType="Self.ContentTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pages" EntityType="Self.Pages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserData" EntityType="Self.UserData" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Content_ToPages" Association="Self.FK_Content_ToPages">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="Content" EntitySet="Content" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserData_ToContent" Association="Self.FK_UserData_ToContent">
+            <End Role="Content" EntitySet="Content" />
+            <End Role="UserData" EntitySet="UserData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserData_ToContentType" Association="Self.FK_UserData_ToContentType">
+            <End Role="ContentTypes" EntitySet="ContentTypes" />
+            <End Role="UserData" EntitySet="UserData" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BigFootModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Content">
+          <Key>
+            <PropertyRef Name="ContentID" />
+          </Key>
+          <Property Name="ContentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PageID" Type="Int32" />
+          <Property Name="ImagPath" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Position" Type="Byte" />
+          <NavigationProperty Name="UserDatas" Relationship="Self.FK_UserData_ToContent" FromRole="Content" ToRole="UserData" />
+          <NavigationProperty Name="Pages" Relationship="BigFootModel.FK_Content_ToPages" FromRole="Content" ToRole="Pages" />
+        </EntityType>
+        <EntityType Name="UserData">
+          <Key>
+            <PropertyRef Name="UDID" />
+          </Key>
+          <Property Name="UDID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContentID" Type="Int32" />
+          <Property Name="ContentTypeID" Type="Int32" />
+          <Property Name="Udata" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Content" Relationship="Self.FK_UserData_ToContent" FromRole="UserData" ToRole="Content" />
+          <NavigationProperty Name="ContentTypes" Relationship="BigFootModel.FK_UserData_ToContentType" FromRole="UserData" ToRole="ContentTypes" />
+        </EntityType>
+        <Association Name="FK_UserData_ToContent">
+          <End Role="Content" Type="Self.Content" Multiplicity="0..1" />
+          <End Role="UserData" Type="Self.UserData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Content">
+              <PropertyRef Name="ContentID" />
+            </Principal>
+            <Dependent Role="UserData">
+              <PropertyRef Name="ContentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BigFootEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Contents" EntityType="Self.Content" />
+          <EntitySet Name="UserDatas" EntityType="Self.UserData" />
+          <AssociationSet Name="FK_UserData_ToContent" Association="Self.FK_UserData_ToContent">
+            <End Role="Content" EntitySet="Contents" />
+            <End Role="UserData" EntitySet="UserDatas" />
+          </AssociationSet>
+          <EntitySet Name="ContentTypes" EntityType="BigFootModel.ContentTypes" />
+          <AssociationSet Name="FK_UserData_ToContentType" Association="BigFootModel.FK_UserData_ToContentType">
+            <End Role="ContentTypes" EntitySet="ContentTypes" />
+            <End Role="UserData" EntitySet="UserDatas" />
+          </AssociationSet>
+          <EntitySet Name="Pages" EntityType="BigFootModel.Pages" />
+          <AssociationSet Name="FK_Content_ToPages" Association="BigFootModel.FK_Content_ToPages">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="Content" EntitySet="Contents" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ContentTypes">
+          <Key>
+            <PropertyRef Name="ContentTypeID" />
+          </Key>
+          <Property Name="ContentTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContentType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PreHTML" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="PostHTML" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="UserCss" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserData" Relationship="BigFootModel.FK_UserData_ToContentType" FromRole="ContentTypes" ToRole="UserData" />
+        </EntityType>
+        <Association Name="FK_UserData_ToContentType">
+          <End Type="BigFootModel.ContentTypes" Role="ContentTypes" Multiplicity="0..1" />
+          <End Type="BigFootModel.UserData" Role="UserData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContentTypes">
+              <PropertyRef Name="ContentTypeID" />
+            </Principal>
+            <Dependent Role="UserData">
+              <PropertyRef Name="ContentTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Pages">
+          <Key>
+            <PropertyRef Name="PageID" />
+          </Key>
+          <Property Name="PageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Page" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Content" Relationship="BigFootModel.FK_Content_ToPages" FromRole="Pages" ToRole="Content" />
+        </EntityType>
+        <Association Name="FK_Content_ToPages">
+          <End Type="BigFootModel.Pages" Role="Pages" Multiplicity="0..1" />
+          <End Type="BigFootModel.Content" Role="Content" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pages">
+              <PropertyRef Name="PageID" />
+            </Principal>
+            <Dependent Role="Content">
+              <PropertyRef Name="PageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BigFootModelStoreContainer" CdmEntityContainer="BigFootEntities">
+          <EntitySetMapping Name="Contents">
+            <EntityTypeMapping TypeName="BigFootModel.Content">
+              <MappingFragment StoreEntitySet="Content">
+                <ScalarProperty Name="ContentID" ColumnName="ContentID" />
+                <ScalarProperty Name="PageID" ColumnName="PageID" />
+                <ScalarProperty Name="ImagPath" ColumnName="ImagPath" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserDatas">
+            <EntityTypeMapping TypeName="BigFootModel.UserData">
+              <MappingFragment StoreEntitySet="UserData">
+                <ScalarProperty Name="UDID" ColumnName="UDID" />
+                <ScalarProperty Name="ContentID" ColumnName="ContentID" />
+                <ScalarProperty Name="ContentTypeID" ColumnName="ContentTypeID" />
+                <ScalarProperty Name="Udata" ColumnName="Udata" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContentTypes">
+            <EntityTypeMapping TypeName="BigFootModel.ContentTypes">
+              <MappingFragment StoreEntitySet="ContentTypes">
+                <ScalarProperty Name="UserCss" ColumnName="UserCss" />
+                <ScalarProperty Name="PostHTML" ColumnName="PostHTML" />
+                <ScalarProperty Name="PreHTML" ColumnName="PreHTML" />
+                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+                <ScalarProperty Name="ContentTypeID" ColumnName="ContentTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pages">
+            <EntityTypeMapping TypeName="BigFootModel.Pages">
+              <MappingFragment StoreEntitySet="Pages">
+                <ScalarProperty Name="Page" ColumnName="Page" />
+                <ScalarProperty Name="PageID" ColumnName="PageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

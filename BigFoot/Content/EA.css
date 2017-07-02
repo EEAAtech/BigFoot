@@ -1,0 +1,175 @@
+body {
+    background-color: #614530;
+    color: white;
+}
+
+
+a, .navbar-nav, .well-lg {
+    color: #E0A67A;
+}
+
+.myamenu {
+    color: darkslateblue !important;
+    background-color: bisque;
+    text-align: center;
+    -webkit-filter: drop-shadow(12px 12px 25px rgba(0,0,0,0.5));
+    filter: drop-shadow(5px 5px 5px #222);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+}
+
+.myatag {
+    color: brown;
+    background-color: bisque;
+    text-align: center;
+    padding: 3px;
+    border: inset thin;
+    -webkit-filter: drop-shadow(12px 12px 25px rgba(0,0,0,0.5));
+    filter: drop-shadow(5px 5px 5px #222);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+}
+
+
+
+/* Nice box for details in a Mast Detail screen */
+.MastDet {
+        background-image: url(../EAwell.jpg);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        padding-top: 5px;
+        padding-left: 30px;
+        padding-bottom: 10px;
+        padding-right: 15px;
+    }
+
+
+/* Bigger Checkboxes */
+input[type=checkbox] {
+    zoom: 1.5;
+ }
+
+/* Emblem
+<a id="emblem" href="~/"><img src="~/Emblem.png" height=100px; alt="Nunes HR System" /> </a>
+ */
+ #emblem {
+        position: fixed;
+        left: 0px;
+        top: 15px;
+        -webkit-filter: drop-shadow(12px 12px 25px rgba(0,0,0,0.5));
+        filter: drop-shadow(5px 5px 5px #222);
+        -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+        filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    }
+
+/* Multilevel nav menu */
+    .dropdown-submenu {
+            position: relative;
+        }
+
+            .dropdown-submenu > .dropdown-menu {
+                top: 0;
+                left: 100%;
+                margin-top: -6px;
+                margin-left: -1px;
+                -webkit-border-radius: 0 6px 6px 6px;
+                -moz-border-radius: 0 6px 6px;
+                border-radius: 0 6px 6px 6px;
+            }
+
+            .dropdown-submenu:hover > .dropdown-menu {
+                display: block;
+            }
+
+            .dropdown-submenu > a:after {
+                display: block;
+                content: " ";
+                float: right;
+                width: 0;
+                height: 0;
+                border-color: transparent;
+                border-style: solid;
+                border-width: 5px 0 5px 5px;
+                border-left-color: #ccc;
+                margin-top: 5px;
+                margin-right: -10px;
+            }
+
+            .dropdown-submenu:hover > a:after {
+                border-left-color: #fff;
+            }
+
+            .dropdown-submenu.pull-left {
+                float: none;
+            }
+
+                .dropdown-submenu.pull-left > .dropdown-menu {
+                    left: -100%;
+                    margin-left: 10px;
+                    -webkit-border-radius: 6px 0 6px 6px;
+                    -moz-border-radius: 6px 0 6px 6px;
+                    border-radius: 6px 0 6px 6px;
+                }
+
+
+/* 3D Menu  */
+.dropdown-menu a {
+    color: darkslateblue !important;
+    background-color: bisque;
+    text-align: center;
+    -webkit-filter: drop-shadow(12px 12px 25px rgba(0,0,0,0.5));
+    filter: drop-shadow(5px 5px 5px #222);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+}
+
+/* Attractive a tags. Div above renderBody is id =TopBody */
+#TopBody a {
+    color: brown;
+    background-color: bisque;
+    text-align: center;
+    padding:3px;
+    border:inset thin;
+    -webkit-filter: drop-shadow(12px 12px 25px rgba(0,0,0,0.5));
+    filter: drop-shadow(5px 5px 5px #222);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+}
+
+
+
+/* Print only what is needed 
+<input type="button" onclick="javascript:window.print();" value="print a div!" /> */
+
+    #PrintHeader, #PrintHeader * {
+        visibility:hidden;
+        display:none;
+    }
+
+
+@media print {
+    
+    body * {
+        visibility: hidden;
+    }
+
+    #PrintHeader, #PrintHeader * {
+        visibility: visible;
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+    #section-to-print, #section-to-print * {
+        visibility: visible;
+    }
+
+    #section-to-print {
+        position: absolute;
+        left: 0;
+        top: 50px;
+    }
+
+    
+}

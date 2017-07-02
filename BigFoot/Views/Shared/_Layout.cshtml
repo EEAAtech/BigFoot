@@ -3,42 +3,102 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
+    <title>@ViewBag.Title - Big Foot Goa</title>
+    
+    <link rel="icon" href="BBS.ico">
+    @Styles.Render("~/Content/themes/base/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/dtpic")
 
+    
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
+<body >
+    @Html.Partial("_MenuPartial")
+    
+    @Scripts.Render("~/bundles/jquery")
+    
+    @Scripts.Render("~/bundles/jqueryui")
+
+    @Scripts.Render("~/bundles/jquerydtpicker")
+    <div id="TopBody" class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Erryl Alvares</p>
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+<script>
+    $(function () {
+        //Change the "a" in menu and body
+        var sel = $('.dropdown-menu a');
+        sel.addClass('myamenu');
+
+        var bdy = $("#TopBody a");
+        bdy.addClass('myatag');
+
+        
+
+        //DateTime picker
+        $('input[type=date]').datepicker({
+            dateFormat: "dd-M-yy",
+            showButtonPanel: true,
+            changeMonth: true,
+            changeYear: true
+        }).attr('type', 'text').attr('autocomplete', 'off');
+
+        //Disable teh browsers default date picker
+        jQuery.validator.methods["date"] = function (value, element) { return true; }
+
+
+    });
+
+    //autocomplete on any view without id
+	//<input type="text" id="Item" name="Item" data-autocomplete-url="@@Url.Action("AutoComplete")" />
+ //   $(document).ready(function () {
+ //       $('*[data-autocomplete-url]')
+ //           .each(function () {
+ //               $(this).autocomplete({
+ //                   source: $(this).data("autocomplete-url")
+ //               });
+ //           });
+ //   });
+
+
+//Autocomplete on any view with id
+// @@Html.HiddenFor(model => model.CustomerID) //choose the ID field of your model
+// <input type="text" id="Customer" name="Customer" style="color:black;" data-autocomplete-idholder="#CustomerID" data-autocombo-url="@@Url.Action("AutoCompleteCusts")"  class="form-control" />  //for Create View
+// <input type="text"  value="@@Model.Customer.Name" id="Customer" name="Customer" style="color:black;" data-autocomplete-idholder="#CustomerID" data-autocombo-url="@@Url.Action("AutoCompleteCusts")" class="form-control" />  //for edit view
+//sample controller
+// public ActionResult AutoCompleteCusts(string term)
+//        {
+//            var filteredItems = db.Customers.Where(c => c.Name.Contains(term)).Select(c => new { id = c.CustomerID, value = c.Name });
+
+//           return Json(filteredItems, JsonRequestBehavior.AllowGet);
+//        }
+
+    
+ $(document).ready(function () {
+        $('*[data-autocombo-url]')
+            .each(function () {
+                $(this).autocomplete({
+                    source: $(this).data("autocombo-url"),
+                    minLenght: 3,
+                    delay: 500,
+                    select: function (event, ui) {
+                        $($(this).data("autocomplete-idholder")).val(ui.item.id);
+                    }
+                });
+            });
+    });
+
+</script>
+
+   
 </body>
+
 </html>

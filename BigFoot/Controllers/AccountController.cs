@@ -1,19 +1,18 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using BigFoot.Models;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
 
+//made in the new NTHR
 namespace BigFoot.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : EAController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -22,7 +21,7 @@ namespace BigFoot.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -34,9 +33,9 @@ namespace BigFoot.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -120,7 +119,7 @@ namespace BigFoot.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -155,15 +154,16 @@ namespace BigFoot.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return Redirect(callbackUrl);
+                    //return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }
@@ -211,23 +211,85 @@ namespace BigFoot.Controllers
 
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
+                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                 // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                TempData["lu"] = callbackUrl;
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                //return View("ForgotPasswordConfirmation",callbackUrl);
             }
 
             // If we got this far, something failed, redisplay form
             return View(model);
         }
 
-        //
-        // GET: /Account/ForgotPasswordConfirmation
-        [AllowAnonymous]
         public ActionResult ForgotPasswordConfirmation()
         {
+            ViewBag.lu = (string)TempData["lu"] ?? "makazai";
             return View();
         }
+
+        [Authorize(Roles = "Boss")]
+        public ActionResult GivePrivilage()
+        {
+            List<ApplicationUser> usrs = UserManager.Users.ToList();
+            List<string> delkeys = new List<string>();
+            List<ApplicationUser> boss = new List<ApplicationUser>();
+            List<ApplicationUser> hr = new List<ApplicationUser>();
+            List<ApplicationUser> anon = new List<ApplicationUser>();
+            int cnt = usrs.Count();
+            for (int i = 0; i < cnt; i++)
+            {
+                if (UserManager.IsInRole(usrs[i].Id, "Boss"))
+                {
+                    boss.Add(usrs[i]);
+                    delkeys.Add(usrs[i].Email);
+                }
+                if (UserManager.IsInRole(usrs[i].Id, "hr"))
+                {
+                    hr.Add(usrs[i]);
+                    delkeys.Add(usrs[i].Email);
+                }
+                if (UserManager.IsInRole(usrs[i].Id, "anon"))
+                {
+                    anon.Add(usrs[i]);
+                    delkeys.Add(usrs[i].Email);
+                }
+            }
+
+            for (int i = 0; i < delkeys.Count(); i++)
+            {
+                usrs.Remove(UserManager.FindByEmail(delkeys[i]));
+            }
+            ViewBag.usrs = usrs;
+            ViewBag.boss = boss; ViewBag.hr = hr; ViewBag.anon = anon;
+
+
+            return View();
+        }
+
+        [Authorize(Roles = "Boss")]
+        public ActionResult SaveRoles(string id, string rl)
+        {
+            UserManager.AddToRole(id, rl);
+            return RedirectToAction("GivePrivilage");
+        }
+
+        [Authorize(Roles = "Boss")]
+        public ActionResult PurgeRoles(string id, string rl)
+        {
+            UserManager.RemoveFromRole(id, rl);
+            return RedirectToAction("GivePrivilage");
+        }
+
+        //
+        // GET: /Account/ForgotPasswordConfirmation
+        //[AllowAnonymous]
+        //public ActionResult ForgotPasswordConfirmation()
+        //{
+        //    ViewBag.lu = (string)TempData["lu"] ?? "makazai";
+        //    return View();
+        //}
 
         //
         // GET: /Account/ResetPassword
