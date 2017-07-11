@@ -240,6 +240,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\InnerCircle\Content\bootstrap-theme.css" />
+    <Content Include="Areas\InnerCircle\Content\bootstrap-theme.min.css" />
+    <Content Include="Areas\InnerCircle\Content\bootstrap.css" />
+    <Content Include="Areas\InnerCircle\Content\bootstrap.min.css" />
+    <Content Include="Areas\InnerCircle\Content\EA.css" />
+    <Content Include="Areas\InnerCircle\Content\Site.css" />
     <Content Include="BFMdl.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>BFMdl.edmx</DependentUpon>
@@ -307,6 +313,10 @@
     <Content Include="Areas\InnerCircle\Views\UserDatas\Edit.cshtml" />
     <Content Include="Areas\InnerCircle\Views\UserDatas\Index.cshtml" />
     <Content Include="Areas\InnerCircle\Views\Shared\_MenuPartial.cshtml" />
+    <Content Include="Areas\InnerCircle\Content\bootstrap-theme.css.map" />
+    <Content Include="Areas\InnerCircle\Content\bootstrap-theme.min.css.map" />
+    <Content Include="Areas\InnerCircle\Content\bootstrap.css.map" />
+    <Content Include="Areas\InnerCircle\Content\bootstrap.min.css.map" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

@@ -33,6 +33,11 @@ namespace BigFoot
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/EA.css"));
+
+            bundles.Add(new StyleBundle("~/InnerCircle/Content/Admcss").Include(
+                     "~/Areas/InnerCircle/Content/bootstrap.css",
+                     "~/Areas/InnerCircle/Content/site.css",
+                     "~/Areas/InnerCircle/Content/EA.css"));
         }
     }
 }

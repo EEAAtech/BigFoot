@@ -1,101 +1,55 @@
 ﻿
 
-<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar-wrapper">
     <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a id="emblem" href="~/"><img src="~/Custom/Emblem.png" height=100px; alt="Nunes HR System" /> </a>
-            @Html.ActionLink("Nunes HR", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Masters<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="~/InnerCircle/Pages">Pages</a></li>
-                        <li><a href="~/InnerCircle/ContentTypes">Content Types</a></li>
-                        <li><a href="~/InnerCircle/Contents">Contents</a></li>
-                        <li><a href="~/InnerCircle/UserDatas">User Data</a></li>
-                        
-                    </ul>
-                </li>
-
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Employee<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="~/Employees">Employees</a></li>                                                
-                        <li><a href="~/Employees/DailyAllow?dt=@DateTime.Today.ToString("dd-MMM-yyyy")">Daily Allowance</a></li>
-                        <li><a href="~/Payrolls/AttendanceRegister" target="_blank">Attendance Register</a></li>
-                    </ul>
-                </li>
-
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Loan<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="~/Loans">Issue Loan</a></li>
-                        @*<li><a href="~/LoanSkips">Skip Loan</a></li>*@
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Payroll<span class="caret"></span></a>
-                    <ul class="dropdown-menu">                        
-                        <li><a href="~/Bonuses">Current Bonus</a></li>
-                        <li><a href="~/Bonuses/OldBonus?yr=@DateTime.Now.Year">Past Bonuses</a></li>
-                        <li><a href="~/Payrolls/Instructions">Payroll Instructions</a></li>
-                        <li><hr /></li>
-                        <li><a href="~/Payrolls/RunPayroll" target="_blank">Run Payroll</a></li>
-                        <li><a href="~/Payrolls/FreezePayroll" target="_blank">Freeze Payroll</a></li>
-                        <li><hr /></li>
-                        <li><a href="~/Payrolls/Adjustment">Payroll Adjustments</a></li>
-                    </ul>
-                </li>
-                
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Reports<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="~/Payrolls/PayRegRq" target="_blank">Pay Register</a></li>
-                        <li><a href="~/Payrolls/PaySlipsMRq" target="_blank">Payslips</a></li>
-                        <li><a href="~/Payrolls/LoanOutstanding" target="_blank">Outstanding Loans</a></li>                        
-                        <li><hr /></li>
-
-                        <li class="dropdown dropdown-submenu">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Export Cat A<span class="caret"></span></a>
+        <nav class="navbar navbar-inverse navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Big Foot Goa</a>
+                </div>
+                <a id="emblem" href="~/"><img src="Ancestralgoasmall.png" height=100px; alt="Big Foot Goa" /> </a>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="#">Home</a>
+                        </li>
+                        <li>
+                            <a href="#about">About</a>
+                        </li>
+                        <li>
+                            <a href="#contact">Information</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Attractions<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                             
-                                <li class="dropdown dropdown-submenu">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Before Adjustments<span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="~/Payrolls/ExportRegEmps" target="_blank">HDFC</a></li>
-                                        <li><a href="~/Payrolls/ExportNonRegEmps" target="_blank">Non HDFC</a></li>
-                                    </ul>
+                                <li>
+                                    <a href="#">Ancestral Goa</a>
                                 </li>
-
-                                <li class="dropdown dropdown-submenu">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Adjustments<span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="~/Payrolls/ExportAdjustmentsHDFCRq" target="_blank">HDFC</a></li>
-                                        <li><a href="~/Payrolls/ExportAdjustmentsNonHDFCRq" target="_blank">Non HDFC</a></li>
-                                    </ul>
+                                <li>
+                                    <a href="#">Pride Of Goa</a>
+                                </li>
+                                <li>
+                                    <a href="#">Only In Goa</a>
+                                </li>
+                                <li role="separator" class="divider"></li>
+                                <li class="dropdown-header">Fun Things</li>
+                                <li>
+                                    <a href="#">Learnings</a>
+                                </li>
+                                <li>
+                                    <a href="#">Venue's</a>
                                 </li>
                             </ul>
                         </li>
-                        <li class="dropdown dropdown-submenu">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Export Cat B<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="~/Payrolls/ExportTypeBPayRegisterRq" target="_blank">Pay Reg. Before Adjustments</a></li>
-                                <li><a href="~/Payrolls/ExportTypeBPayRegisterAdjRq" target="_blank">Pay Reg. Adjustments</a></li>
-                            </ul>
-                        </li>
-
-                            </ul>
-                        </li>
-
                     </ul>
-            @Html.Partial("_LoginPartial")
-        </div>
+                </div>
+            </div>
+        </nav>
     </div>
 </div>
