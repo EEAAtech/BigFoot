@@ -28,10 +28,9 @@
     
     @Scripts.Render("~/bundles/jquery")
     
-    <div class="featurette-divider">
-    </div>
+   
 
-    <div id="TopBody" class="container body-content">
+    <div id="TopBody" class="container">
         <div id="pricing " class="container-fluid pots">
             @RenderBody()
         </div>
@@ -40,7 +39,8 @@
                 <p>&copy; @DateTime.Now.Year - Erryl Alvares</p>
             </footer>
     </div>
-
+    <div class="featurette-divider">
+    </div>
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 

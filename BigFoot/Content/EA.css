@@ -7,6 +7,27 @@ body {
 
 }
 
+h2 {
+    /*background-image: url(/Custom/foot.png);
+    background-repeat: no-repeat;
+    
+    background-position-y: -50px;
+    background-position-x: -30px;
+    background-size: 350px;*/
+    margin-left: 30px;
+    color:antiquewhite;
+    z-index:300;
+}
+
+
+#Titlefoot {
+    position: absolute;
+    left: 430px;
+    top: 70px;
+    z-index:-400;
+}
+
+
 .EApic {
     width: 324px;
     height: 432px;
@@ -35,6 +56,25 @@ body {
     -o-transition: opacity 0.5s ease-in-out;
     -ms-transition: opacity 0.5s ease-in-out;
     transition: opacity 0.5s ease-in-out;
+}
+
+
+.pots {
+    margin-top: 0px;
+    background-color: #82663A;
+    opacity: 0.8;
+    margin-right: 35px;
+    margin-left: 35px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.row {
+    margin-top: 30px;
+}
+
+.navbar {
+    margin-bottom:0px;
 }
 
 /* Featurettes
@@ -138,9 +178,10 @@ input[type=checkbox] {
 <a id="emblem" href="~/"><img src="~/Emblem.png" height=100px; alt="Nunes HR System" /> </a>
  */
  #emblem {
-        position: fixed;
-        left: 0px;
-        top: 15px;
+        position:absolute;
+        right:-115px;
+        top:-50px;
+
         -webkit-filter: drop-shadow(12px 12px 25px rgba(0,0,0,0.5));
         filter: drop-shadow(5px 5px 5px #222);
         -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
