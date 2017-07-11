@@ -190,6 +190,12 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\InnerCircle\Controllers\ContentsController.cs" />
+    <Compile Include="Areas\InnerCircle\Controllers\ContentTypesController.cs" />
+    <Compile Include="Areas\InnerCircle\Controllers\EAIController.cs" />
+    <Compile Include="Areas\InnerCircle\Controllers\PagesController.cs" />
+    <Compile Include="Areas\InnerCircle\Controllers\UserDatasController.cs" />
+    <Compile Include="Areas\InnerCircle\InnerCircleAreaRegistration.cs" />
     <Compile Include="BFMdl.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -249,6 +255,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\EA.css" />
+    <Content Include="Custom\backdrop.jpg" />
     <Content Include="Custom\BBS.ico" />
     <Content Include="Custom\EAwell.jpg" />
     <Content Include="Custom\Emblem.png" />
@@ -276,6 +283,30 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Areas\InnerCircle\Views\web.config" />
+    <Content Include="Areas\InnerCircle\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\InnerCircle\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\InnerCircle\Views\ContentTypes\Create.cshtml" />
+    <Content Include="Areas\InnerCircle\Views\ContentTypes\Delete.cshtml" />
+    <Content Include="Areas\InnerCircle\Views\ContentTypes\Details.cshtml" />
+    <Content Include="Areas\InnerCircle\Views\ContentTypes\Edit.cshtml" />
+    <Content Include="Areas\InnerCircle\Views\ContentTypes\Index.cshtml" />
+    <Content Include="Areas\InnerCircle\Views\Pages\Create.cshtml" />
+    <Content Include="Areas\InnerCircle\Views\Pages\Delete.cshtml" />
+    <Content Include="Areas\InnerCircle\Views\Pages\Details.cshtml" />
+    <Content Include="Areas\InnerCircle\Views\Pages\Edit.cshtml" />
+    <Content Include="Areas\InnerCircle\Views\Pages\Index.cshtml" />
+    <Content Include="Areas\InnerCircle\Views\Contents\Create.cshtml" />
+    <Content Include="Areas\InnerCircle\Views\Contents\Delete.cshtml" />
+    <Content Include="Areas\InnerCircle\Views\Contents\Details.cshtml" />
+    <Content Include="Areas\InnerCircle\Views\Contents\Edit.cshtml" />
+    <Content Include="Areas\InnerCircle\Views\Contents\Index.cshtml" />
+    <Content Include="Areas\InnerCircle\Views\UserDatas\Create.cshtml" />
+    <Content Include="Areas\InnerCircle\Views\UserDatas\Delete.cshtml" />
+    <Content Include="Areas\InnerCircle\Views\UserDatas\Details.cshtml" />
+    <Content Include="Areas\InnerCircle\Views\UserDatas\Edit.cshtml" />
+    <Content Include="Areas\InnerCircle\Views\UserDatas\Index.cshtml" />
+    <Content Include="Areas\InnerCircle\Views\Shared\_MenuPartial.cshtml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -334,6 +365,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\InnerCircle\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

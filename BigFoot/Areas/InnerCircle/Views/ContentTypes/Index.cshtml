@@ -1,0 +1,51 @@
+﻿@model IEnumerable<BigFoot.ContentTypes>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ContentType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PreHTML)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PostHTML)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserCss)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContentType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PreHTML)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PostHTML)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserCss)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ContentTypeID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ContentTypeID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ContentTypeID })
+        </td>
+    </tr>
+}
+
+</table>

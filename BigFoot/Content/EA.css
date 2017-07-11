@@ -1,6 +1,91 @@
 body {
-    background-color: #614530;
-    color: white;
+    background-image:url(/Custom/backdrop.jpg);
+    background-repeat:no-repeat;
+    background-size:contain;
+    padding-bottom: 40px;
+    color: #634082;
+
+}
+
+.EApic {
+    width: 324px;
+    height: 432px;
+}
+
+
+.panel-body {
+    padding: 0px;
+}
+
+.EAtext {
+    width: 324px;
+    height: 432px;
+    background: #FFF;
+    opacity: 0;
+}
+
+.EApic:hover .EAtext {
+    opacity: 0.9;
+    text-align: justify;
+    color: #634082;
+    padding: 10px;
+    font-size: 25px;
+    -webkit-transition: opacity 0.5s ease-out;
+    -moz-transition: opacity 0.5s ease-in-out;
+    -o-transition: opacity 0.5s ease-in-out;
+    -ms-transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Featurettes
+------------------------- */
+
+.featurette-divider {
+    margin-top: 30px; /* Space out the Bootstrap <hr> more */
+}
+
+/* Thin out the marketing headings */
+.featurette-heading {
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -1px;
+}
+
+
+.slideanim {
+    visibility: hidden;
+}
+
+.slide {
+    animation-name: slide;
+    -webkit-animation-name: slide;
+    animation-duration: 1s;
+    -webkit-animation-duration: 1s;
+    visibility: visible;
+}
+
+@keyframes slide {
+    0% {
+        opacity: 0;
+        transform: translateY(70%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0%);
+    }
+}
+
+@-webkit-keyframes slide {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(70%);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0%);
+    }
 }
 
 

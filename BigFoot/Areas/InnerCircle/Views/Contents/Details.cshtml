@@ -1,0 +1,42 @@
+﻿@model BigFoot.Content
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Content</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ImagPath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImagPath)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Position)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Position)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pages.Page)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pages.Page)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ContentID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -8,6 +8,7 @@ namespace BigFoot.Controllers
 {
     public class HomeController : Controller
     {
+        private BigFootEntities db = new BigFootEntities();
         public ActionResult Index()
         {
             return View();
@@ -15,9 +16,9 @@ namespace BigFoot.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            var cont = db.Contents.Where(c => c.PageID == 1).OrderBy(c => c.Position);            
 
-            return View();
+            return View(cont);
         }
 
         public ActionResult Contact()

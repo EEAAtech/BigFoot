@@ -1,0 +1,33 @@
+﻿@model IEnumerable<BigFoot.Pages>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Page)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Page)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PageID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PageID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PageID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,50 @@
+﻿@model BigFoot.ContentTypes
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ContentTypes</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ContentType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContentType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PreHTML)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PreHTML)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PostHTML)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostHTML)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserCss)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserCss)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ContentTypeID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

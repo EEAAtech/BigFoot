@@ -2,99 +2,96 @@
 <html>
 <head>
     <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An educational center for preservation of Art, Culture and Environment">
+    <meta name="author" content="Erryl Alvares">
     <title>@ViewBag.Title - Big Foot Goa</title>
     
-    <link rel="icon" href="BBS.ico">
+    <link rel="icon" href="~/Custom/BBS.ico">
     @Styles.Render("~/Content/themes/base/css")
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/dtpic")
 
-    
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
 </head>
 <body >
     @Html.Partial("_MenuPartial")
     
     @Scripts.Render("~/bundles/jquery")
     
-    @Scripts.Render("~/bundles/jqueryui")
+    <div class="featurette-divider">
+    </div>
 
-    @Scripts.Render("~/bundles/jquerydtpicker")
     <div id="TopBody" class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Erryl Alvares</p>
-        </footer>
+        <div id="pricing " class="container-fluid pots">
+            @RenderBody()
+        </div>
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - Erryl Alvares</p>
+            </footer>
     </div>
 
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 
 <script>
-    $(function () {
-        //Change the "a" in menu and body
-        var sel = $('.dropdown-menu a');
-        sel.addClass('myamenu');
+    $(document).ready(function () {
+        // Add smooth scrolling to all links in navbar + footer link
+        $(".navbar a, footer a").on('click', function (event) {
+            // Make sure this.hash has a value before overriding default behavior
+            if (this.hash !== "") {
+                // Prevent default anchor click behavior
+                event.preventDefault();
 
-        var bdy = $("#TopBody a");
-        bdy.addClass('myatag');
+                // Store hash
+                var hash = this.hash;
 
-        
+                // Using jQuery's animate() method to add smooth page scroll
+                // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+                $('html, body').animate({
+                    scrollTop: $(hash).offset().top
+                }, 900, function () {
 
-        //DateTime picker
-        $('input[type=date]').datepicker({
-            dateFormat: "dd-M-yy",
-            showButtonPanel: true,
-            changeMonth: true,
-            changeYear: true
-        }).attr('type', 'text').attr('autocomplete', 'off');
-
-        //Disable teh browsers default date picker
-        jQuery.validator.methods["date"] = function (value, element) { return true; }
-
-
-    });
-
-    //autocomplete on any view without id
-	//<input type="text" id="Item" name="Item" data-autocomplete-url="@@Url.Action("AutoComplete")" />
- //   $(document).ready(function () {
- //       $('*[data-autocomplete-url]')
- //           .each(function () {
- //               $(this).autocomplete({
- //                   source: $(this).data("autocomplete-url")
- //               });
- //           });
- //   });
-
-
-//Autocomplete on any view with id
-// @@Html.HiddenFor(model => model.CustomerID) //choose the ID field of your model
-// <input type="text" id="Customer" name="Customer" style="color:black;" data-autocomplete-idholder="#CustomerID" data-autocombo-url="@@Url.Action("AutoCompleteCusts")"  class="form-control" />  //for Create View
-// <input type="text"  value="@@Model.Customer.Name" id="Customer" name="Customer" style="color:black;" data-autocomplete-idholder="#CustomerID" data-autocombo-url="@@Url.Action("AutoCompleteCusts")" class="form-control" />  //for edit view
-//sample controller
-// public ActionResult AutoCompleteCusts(string term)
-//        {
-//            var filteredItems = db.Customers.Where(c => c.Name.Contains(term)).Select(c => new { id = c.CustomerID, value = c.Name });
-
-//           return Json(filteredItems, JsonRequestBehavior.AllowGet);
-//        }
-
-    
- $(document).ready(function () {
-        $('*[data-autocombo-url]')
-            .each(function () {
-                $(this).autocomplete({
-                    source: $(this).data("autocombo-url"),
-                    minLenght: 3,
-                    delay: 500,
-                    select: function (event, ui) {
-                        $($(this).data("autocomplete-idholder")).val(ui.item.id);
-                    }
+                    // Add hash (#) to URL when done scrolling (default click behavior)
+                    window.location.hash = hash;
                 });
+            } // End if
+        });
+
+        $(function () {
+            $(".slideanim").each(function () {
+                var pos = $(this).offset().top;
+
+                var winTop = $(window).scrollTop();
+                if (pos < winTop + 600) {
+                    $(this).addClass("slide");
+                }
             });
-    });
+        });
+
+        $(window).scroll(function () {
+            $("#nextappearing").each(function () {
+                var pos = $(this).offset().top;
+
+                var winTop = $(window).scrollTop();
+                if (pos < winTop + 600) {
+                    $(this).addClass("slide");
+                }
+            });
+        });
+
+    })
+
 
 </script>
 

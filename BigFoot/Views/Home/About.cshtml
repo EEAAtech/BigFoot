@@ -1,7 +1,45 @@
-﻿@{
-    ViewBag.Title = "About";
-}
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+﻿@model IEnumerable<BigFoot.Content>
 
-<p>Use this area to provide additional information about about.</p>
+@{
+    ViewBag.Title = "First Page";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+@{ 
+    var eachRow = Model.Take(3);
+}
+
+@foreach (var p in Model)
+{
+    <div class="col-sm-4 col-xs-12 ">
+        <div class="panel panel-default text-center ">
+            
+
+            <div class="panel-body EApic" style="background: url(@p.ImagPath) no-repeat;">
+                <div class="EAtext">
+            @foreach (var d in p.UserDatas)
+            {
+
+
+                @Html.Raw(d.ContentTypes.PreHTML);
+                @d.Udata;
+                @Html.Raw(d.ContentTypes.PostHTML);
+
+                @*@Html.Raw(System.Web.HttpUtility.HtmlDecode(Model.yourhtmlva‌​lue))*@
+
+                    @*<p><strong>Evaluate: </strong> we inspect your house to determine its fair rental price</p>
+                    <p><strong>Estimate: </strong> we estimate the work needed (if required) before it can be rented</p>
+                    <p><strong>&nbsp; </strong> &nbsp;</p>*@
+
+            
+            }
+                </div>
+            </div>
+
+
+            @*closing divs of row*@
+        </div>
+    </div>
+}

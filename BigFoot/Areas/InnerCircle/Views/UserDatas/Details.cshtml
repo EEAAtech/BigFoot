@@ -1,0 +1,42 @@
+﻿@model BigFoot.UserData
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>UserData</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Udata)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Udata)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Content.ImagPath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Content.ImagPath)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContentTypes.ContentType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContentTypes.ContentType)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.UDID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
