@@ -12,13 +12,13 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.Pages.Page)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.ImagPath)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Position)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Pages.Page)
         </th>
         <th></th>
     </tr>
@@ -26,13 +26,13 @@
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.Pages.Page)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.ImagPath)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Position)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Pages.Page)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ContentID }) |
@@ -40,6 +40,7 @@
             @Html.ActionLink("Delete", "Delete", new { id=item.ContentID })
         </td>
     </tr>
+    
 }
 
 </table>

@@ -21,6 +21,8 @@ namespace BigFoot.Areas.InnerCircle.Controllers
             return View(contents.ToList());
         }
 
+       
+
         // GET: InnerCircle/Contents/Details/5
         public ActionResult Details(int? id)
         {

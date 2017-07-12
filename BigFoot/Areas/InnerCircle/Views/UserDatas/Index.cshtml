@@ -11,25 +11,27 @@
 </p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Udata)
-        </th>
+        <th>@Html.DisplayNameFor(model => model.Content.Pages.Page)</th>
         <th>
             @Html.DisplayNameFor(model => model.Content.ImagPath)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ContentTypes.ContentType)
+            Data
+        </th>
+        <th>
+            Content Type
         </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Udata)
-        </td>
+        <td>@Html.DisplayFor(modelItem => item.Content.Pages.Page)</td>
         <td>
             @Html.DisplayFor(modelItem => item.Content.ImagPath)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Udata)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ContentTypes.ContentType)

@@ -18,7 +18,7 @@ namespace BigFoot.Areas.InnerCircle.Controllers
         public ActionResult Index()
         {
             var userDatas = db.UserDatas.Include(u => u.Content).Include(u => u.ContentTypes);
-            return View(userDatas.ToList());
+            return View(userDatas.OrderBy(u=>u.Content.PageID).ThenBy(u=>u.ContentID).ToList());
         }
 
         // GET: InnerCircle/UserDatas/Details/5

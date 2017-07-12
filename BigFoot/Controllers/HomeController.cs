@@ -16,17 +16,20 @@ namespace BigFoot.Controllers
 
         public ActionResult About(string id)
         {
-            id = id.Replace('-', ' ');
-            var pg = db.Pages.FirstOrDefault(p => p.Page.Contains(id));
-
-            IEnumerable<BigFoot.Content> cont;
-            if (pg != null)
+            if (id?.Length > 0)
             {
-                cont = db.Contents.Where(c => c.PageID == pg.PageID).OrderBy(c => c.Position);
-                ViewBag.Title = id.Replace('-', ' ');
-                return View(cont);
+                id = id.Replace('-', ' ');
+                var pg = db.Pages.FirstOrDefault(p => p.Page.Contains(id));
+
+                IEnumerable<BigFoot.Content> cont;
+                if (pg != null)
+                {
+                    cont = db.Contents.Where(c => c.PageID == pg.PageID).OrderBy(c => c.Position);
+                    ViewBag.Title = id.Replace('-', ' ');
+                    return View(cont);
+                }
             }
-            return RedirectToAction("Index");
+            return View("Index");
 
         }
 
