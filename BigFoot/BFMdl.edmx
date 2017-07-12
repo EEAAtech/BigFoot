@@ -24,12 +24,31 @@
           <Property Name="PostHTML" Type="varchar" MaxLength="300" />
           <Property Name="UserCss" Type="varchar" MaxLength="300" />
         </EntityType>
+        <EntityType Name="Menus">
+          <Key>
+            <PropertyRef Name="MenuID" />
+          </Key>
+          <Property Name="MenuID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Menu" Type="varchar" MaxLength="50" />
+          <Property Name="PageID" Type="int" />
+          <Property Name="mUrl" Type="varchar" MaxLength="300" />
+        </EntityType>
         <EntityType Name="Pages">
           <Key>
             <PropertyRef Name="PageID" />
           </Key>
           <Property Name="PageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Page" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SubMenus">
+          <Key>
+            <PropertyRef Name="SubMenuID" />
+          </Key>
+          <Property Name="SubMenuID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubMenu" Type="varchar" MaxLength="50" />
+          <Property Name="PageID" Type="int" />
+          <Property Name="smUrl" Type="varchar" MaxLength="300" />
+          <Property Name="MenuID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="UserData">
           <Key>
@@ -48,6 +67,42 @@
               <PropertyRef Name="PageID" />
             </Principal>
             <Dependent Role="Content">
+              <PropertyRef Name="PageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menus_ToPages">
+          <End Role="Pages" Type="Self.Pages" Multiplicity="0..1" />
+          <End Role="Menus" Type="Self.Menus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pages">
+              <PropertyRef Name="PageID" />
+            </Principal>
+            <Dependent Role="Menus">
+              <PropertyRef Name="PageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubMenus_ToMenu">
+          <End Role="Menus" Type="Self.Menus" Multiplicity="1" />
+          <End Role="SubMenus" Type="Self.SubMenus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menus">
+              <PropertyRef Name="MenuID" />
+            </Principal>
+            <Dependent Role="SubMenus">
+              <PropertyRef Name="MenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubMenus_ToPages">
+          <End Role="Pages" Type="Self.Pages" Multiplicity="0..1" />
+          <End Role="SubMenus" Type="Self.SubMenus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pages">
+              <PropertyRef Name="PageID" />
+            </Principal>
+            <Dependent Role="SubMenus">
               <PropertyRef Name="PageID" />
             </Dependent>
           </ReferentialConstraint>
@@ -79,11 +134,25 @@
         <EntityContainer Name="BigFootModelStoreContainer">
           <EntitySet Name="Content" EntityType="Self.Content" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ContentTypes" EntityType="Self.ContentTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menus" EntityType="Self.Menus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pages" EntityType="Self.Pages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubMenus" EntityType="Self.SubMenus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserData" EntityType="Self.UserData" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Content_ToPages" Association="Self.FK_Content_ToPages">
             <End Role="Pages" EntitySet="Pages" />
             <End Role="Content" EntitySet="Content" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menus_ToPages" Association="Self.FK_Menus_ToPages">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="Menus" EntitySet="Menus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubMenus_ToMenu" Association="Self.FK_SubMenus_ToMenu">
+            <End Role="Menus" EntitySet="Menus" />
+            <End Role="SubMenus" EntitySet="SubMenus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubMenus_ToPages" Association="Self.FK_SubMenus_ToPages">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="SubMenus" EntitySet="SubMenus" />
           </AssociationSet>
           <AssociationSet Name="FK_UserData_ToContent" Association="Self.FK_UserData_ToContent">
             <End Role="Content" EntitySet="Content" />
@@ -149,6 +218,20 @@
             <End Role="Pages" EntitySet="Pages" />
             <End Role="Content" EntitySet="Contents" />
           </AssociationSet>
+          <EntitySet Name="Menus" EntityType="BigFootModel.Menus" />
+          <EntitySet Name="SubMenus" EntityType="BigFootModel.SubMenus" />
+          <AssociationSet Name="FK_SubMenus_ToMenu" Association="BigFootModel.FK_SubMenus_ToMenu">
+            <End Role="Menus" EntitySet="Menus" />
+            <End Role="SubMenus" EntitySet="SubMenus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menus_ToPages" Association="BigFootModel.FK_Menus_ToPages">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="Menus" EntitySet="Menus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubMenus_ToPages" Association="BigFootModel.FK_SubMenus_ToPages">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="SubMenus" EntitySet="SubMenus" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ContentTypes">
           <Key>
@@ -180,6 +263,8 @@
           <Property Name="PageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Page" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Content" Relationship="BigFootModel.FK_Content_ToPages" FromRole="Pages" ToRole="Content" />
+          <NavigationProperty Name="Menus" Relationship="BigFootModel.FK_Menus_ToPages" FromRole="Pages" ToRole="Menus" />
+          <NavigationProperty Name="SubMenus" Relationship="BigFootModel.FK_SubMenus_ToPages" FromRole="Pages" ToRole="SubMenus" />
         </EntityType>
         <Association Name="FK_Content_ToPages">
           <End Type="BigFootModel.Pages" Role="Pages" Multiplicity="0..1" />
@@ -189,6 +274,65 @@
               <PropertyRef Name="PageID" />
             </Principal>
             <Dependent Role="Content">
+              <PropertyRef Name="PageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Menus">
+          <Key>
+            <PropertyRef Name="MenuID" />
+          </Key>
+          <Property Name="MenuID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Menu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="mUrl" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SubMenus" Relationship="BigFootModel.FK_SubMenus_ToMenu" FromRole="Menus" ToRole="SubMenus" />
+          <Property Name="PageID" Type="Int32" />
+          <NavigationProperty Name="Pages" Relationship="BigFootModel.FK_Menus_ToPages" FromRole="Menus" ToRole="Pages" />
+        </EntityType>
+        <EntityType Name="SubMenus">
+          <Key>
+            <PropertyRef Name="SubMenuID" />
+          </Key>
+          <Property Name="SubMenuID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubMenu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="smUrl" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="MenuID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Menus" Relationship="BigFootModel.FK_SubMenus_ToMenu" FromRole="SubMenus" ToRole="Menus" />
+          <Property Name="PageID" Type="Int32" />
+          <NavigationProperty Name="Pages" Relationship="BigFootModel.FK_SubMenus_ToPages" FromRole="SubMenus" ToRole="Pages" />
+        </EntityType>
+        <Association Name="FK_SubMenus_ToMenu">
+          <End Type="BigFootModel.Menus" Role="Menus" Multiplicity="1" />
+          <End Type="BigFootModel.SubMenus" Role="SubMenus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menus">
+              <PropertyRef Name="MenuID" />
+            </Principal>
+            <Dependent Role="SubMenus">
+              <PropertyRef Name="MenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menus_ToPages">
+          <End Type="BigFootModel.Pages" Role="Pages" Multiplicity="0..1" />
+          <End Type="BigFootModel.Menus" Role="Menus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pages">
+              <PropertyRef Name="PageID" />
+            </Principal>
+            <Dependent Role="Menus">
+              <PropertyRef Name="PageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubMenus_ToPages">
+          <End Type="BigFootModel.Pages" Role="Pages" Multiplicity="0..1" />
+          <End Type="BigFootModel.SubMenus" Role="SubMenus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pages">
+              <PropertyRef Name="PageID" />
+            </Principal>
+            <Dependent Role="SubMenus">
               <PropertyRef Name="PageID" />
             </Dependent>
           </ReferentialConstraint>
@@ -235,6 +379,27 @@
               <MappingFragment StoreEntitySet="Pages">
                 <ScalarProperty Name="Page" ColumnName="Page" />
                 <ScalarProperty Name="PageID" ColumnName="PageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menus">
+            <EntityTypeMapping TypeName="BigFootModel.Menus">
+              <MappingFragment StoreEntitySet="Menus">
+                <ScalarProperty Name="PageID" ColumnName="PageID" />
+                <ScalarProperty Name="mUrl" ColumnName="mUrl" />
+                <ScalarProperty Name="Menu" ColumnName="Menu" />
+                <ScalarProperty Name="MenuID" ColumnName="MenuID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubMenus">
+            <EntityTypeMapping TypeName="BigFootModel.SubMenus">
+              <MappingFragment StoreEntitySet="SubMenus">
+                <ScalarProperty Name="PageID" ColumnName="PageID" />
+                <ScalarProperty Name="MenuID" ColumnName="MenuID" />
+                <ScalarProperty Name="smUrl" ColumnName="smUrl" />
+                <ScalarProperty Name="SubMenu" ColumnName="SubMenu" />
+                <ScalarProperty Name="SubMenuID" ColumnName="SubMenuID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

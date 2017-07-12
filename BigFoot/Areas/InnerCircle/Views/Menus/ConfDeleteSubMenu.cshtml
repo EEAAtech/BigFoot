@@ -1,0 +1,26 @@
+﻿@model BigFoot.SubMenus
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Are You Sure ?</h4>
+            </div>
+
+            <div class="modal-body">
+                <p>You are about to delete @Model.SubMenu</p>
+                <p>Note: The page (if any) that this submenu is linked to will not be deleted</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Dont Delete</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="location.href='@Url.Action("DeleteSM", new { id = Model.SubMenuID })'">Delete it</button>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>

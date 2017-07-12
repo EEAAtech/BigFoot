@@ -10,7 +10,9 @@ body {
     height: 432px;
 }
 
-
+hr {
+    border: 1px solid darkslategrey;
+}
 .panel-body {
     padding: 0px;
 }

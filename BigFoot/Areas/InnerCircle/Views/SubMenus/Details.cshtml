@@ -1,0 +1,42 @@
+﻿@model BigFoot.SubMenus
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SubMenus</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SubMenu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubMenu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.smUrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.smUrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Menus.Menu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Menus.Menu)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SubMenuID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

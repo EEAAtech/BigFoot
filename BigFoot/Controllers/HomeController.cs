@@ -16,7 +16,8 @@ namespace BigFoot.Controllers
 
         public ActionResult About(string id)
         {
-            var pg = db.Pages.FirstOrDefault(p => p.Page == id);
+            id = id.Replace('-', ' ');
+            var pg = db.Pages.FirstOrDefault(p => p.Page.Contains(id));
 
             IEnumerable<BigFoot.Content> cont;
             if (pg != null)
@@ -27,6 +28,12 @@ namespace BigFoot.Controllers
             }
             return RedirectToAction("Index");
 
+        }
+
+        public ActionResult MainMenu()
+        {
+            var m = db.Menus.ToList();
+            return PartialView(m);
         }
 
         public ActionResult Contact()

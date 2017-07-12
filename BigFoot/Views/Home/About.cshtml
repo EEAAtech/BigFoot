@@ -1,8 +1,10 @@
 ﻿@model IEnumerable<BigFoot.Content>
 
+<div id="titbg">
+    <h2>@ViewBag.Title</h2>
+</div>
+@*<img src="~/Custom/foot.png" width="350px" id="Titlefoot" />*@
 
-<h2>@ViewBag.Title</h2>
-<img src="~/Custom/foot.png" width="350px" id="Titlefoot"/>
 
 @{ 
     var eachRow = Model.Take(3);
@@ -14,7 +16,7 @@
         <div class="panel panel-default text-center ">
             
 
-            <div class="panel-body EApic" style="background: url(@p.ImagPath) no-repeat;">
+            <div class="panel-body EApic" style="background: url(@p.ImagPath) no-repeat; background-size:contain;">
                 <div class="EAtext">
             @foreach (var d in p.UserDatas)
             {
@@ -24,12 +26,7 @@
                 @d.Udata;
                 @Html.Raw(d.ContentTypes.PostHTML);
 
-                @*@Html.Raw(System.Web.HttpUtility.HtmlDecode(Model.yourhtmlva‌​lue))*@
-
-                    @*<p><strong>Evaluate: </strong> we inspect your house to determine its fair rental price</p>
-                    <p><strong>Estimate: </strong> we estimate the work needed (if required) before it can be rented</p>
-                    <p><strong>&nbsp; </strong> &nbsp;</p>*@
-
+             
             
             }
                 </div>
@@ -40,3 +37,5 @@
         </div>
     </div>
 }
+
+

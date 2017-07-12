@@ -13,9 +13,16 @@ namespace BigFoot
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-           routes.MapRoute(
+
+            routes.MapRoute(
             name: "MainSite",
             url: "{id}/",
+            defaults: new { controller = "Home", action = "About", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+            name: "MainSiteSubMen",
+            url: "{ignorMen}/{id}/",
             defaults: new { controller = "Home", action = "About", id = UrlParameter.Optional }
             );
 

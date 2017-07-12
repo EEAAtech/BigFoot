@@ -1,0 +1,92 @@
+﻿@model BigFoot.SubMenus
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>SubMenu for: @ViewBag.Menu.Menu</h2>
+
+<p>    
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+<hr style="border-bottom-color:darkslategray;"/>
+
+
+@using (Html.BeginForm("CreateSubMenu", "Menus", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.Hidden("MenuID", (int)ViewBag.Menu.MenuID)
+    @Html.HiddenFor(model => model.PageID)
+    <div class="form-horizontal">
+        <h3>SubMenus</h3>
+        <p>Note: Adding a submenu will cause the page (if any is set) of the main menu to be ignored</p>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.SubMenu, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SubMenu, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SubMenu, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Page</label>
+            <div class="col-md-10">
+                <input type="text" id="Page" name="Page" style="color:black;" data-autocomplete-idholder="#PageID" data-autocombo-url='@Url.Action("AutoCompletePages")' class="form-control" />                
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<hr />
+<h3><u>Existing SubMenus</u></h3>
+<table width="80%">
+    <tr>
+        <th>SubMenu</th>
+        <th>Page</th>
+        <th></th>
+    </tr>
+@foreach (var sm in ViewBag.SubMenus)
+{
+    <tr>
+        <td>@sm.SubMenu</td>
+        <td>@if (sm.PageID != null)
+        {  @sm.Pages.Page }
+        </td> 
+        <th>@Html.ActionLink("Edit","EditSubMenu", new { id = sm.SubMenuID }) |
+        &nbsp; <a href="#" onclick="DeleteSM(@sm.SubMenuID)">Delete</a></th>
+        
+    </tr>
+}
+</table>
+
+<!-- Trigger the modal with a button -->
+<div id="modalWrapper">
+    @* Inject form here *@
+</div>
+
+
+
+<script>
+$(function() {
+    $('#myModal').modal();
+});
+
+function DeleteSM(productId) {
+    $.ajax({
+        url: '/InnerCircle/Menus/DeleteSubMenu/'+ productId, // The method name + paramater
+        success: function(data) {
+            $('#modalWrapper').html(data); // This should be an empty div where you can inject your new html (the partial view)
+            $('#myModal').modal();
+        }
+    });
+}
+</script>

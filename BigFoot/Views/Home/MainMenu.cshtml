@@ -1,0 +1,54 @@
+﻿@model IEnumerable<BigFoot.Menus>
+
+<div class="navbar-wrapper">
+    <div class="container">
+        <nav class="navbar navbar-inverse navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Big Foot Goa</a>
+                </div>
+                <a id="emblem" href="~/"><img src="~/Custom/Emblem.png" height=150px; alt="Big Foot Goa" /> </a>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                     @foreach (var m in Model)
+                     {
+                         if (m.SubMenus.Count == 0)
+                         {
+                        <li>
+                            <a href="@m.mUrl">@m.Menu</a>
+                        </li>
+                         }
+                         else
+                         {
+
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@m.Menu<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    @foreach (SubMenus sm in m.SubMenus)
+                                    {
+                                    <li>
+                                        <a href="@sm.smUrl">@sm.SubMenu</a>
+                                    </li>
+                                    }
+                                </ul>
+                            </li>
+
+
+                         }
+
+                     }
+
+                        
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+

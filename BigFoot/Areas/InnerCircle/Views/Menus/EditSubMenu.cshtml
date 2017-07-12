@@ -1,0 +1,60 @@
+﻿@model BigFoot.SubMenus
+
+@{
+    ViewBag.Title = "Edit SubMenu of Menu: " + Model.Menus.Menu ;
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+@using (Html.BeginForm("EditSubMenu","Menus",FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>SubMenus</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.SubMenuID)
+        @Html.HiddenFor(model => model.PageID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SubMenu, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SubMenu, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SubMenu, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MenuID, "MenuID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("MenuID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MenuID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Page</label>
+            <div class="col-md-10">
+                <input type="text" value="@Model.Pages.Page" id="Page" name="Page" style="color:black;" data-autocomplete-idholder="#PageID" data-autocombo-url="@Url.Action("AutoCompletePages")" class="form-control" />                
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

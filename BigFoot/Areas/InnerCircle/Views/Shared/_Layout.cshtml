@@ -9,7 +9,7 @@
     @Styles.Render("~/Content/themes/base/css")
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/InnerCircle/Content/Admcss")
-    @Styles.Render("~/Content/dtpic")
+    
 
     
 </head>
@@ -43,16 +43,16 @@
 
         
 
-        //DateTime picker
-        $('input[type=date]').datepicker({
-            dateFormat: "dd-M-yy",
-            showButtonPanel: true,
-            changeMonth: true,
-            changeYear: true
-        }).attr('type', 'text').attr('autocomplete', 'off');
+        ////DateTime picker
+        //$('input[type=date]').datepicker({
+        //    dateFormat: "dd-M-yy",
+        //    showButtonPanel: true,
+        //    changeMonth: true,
+        //    changeYear: true
+        //}).attr('type', 'text').attr('autocomplete', 'off');
 
-        //Disable teh browsers default date picker
-        jQuery.validator.methods["date"] = function (value, element) { return true; }
+        ////Disable teh browsers default date picker
+        //jQuery.validator.methods["date"] = function (value, element) { return true; }
 
 
     });

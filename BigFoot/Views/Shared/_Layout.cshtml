@@ -24,10 +24,12 @@
 
 </head>
 <body >
-    @Html.Partial("_MenuPartial")
+    @Html.Action("MainMenu","Home");
+    @*@Html.Partial("_MenuPartial")*@
+
     
     @Scripts.Render("~/bundles/jquery")
-    
+    <img src="~/Custom/backdrop.jpg" id="bg" alt="">
    
 
     <div id="TopBody" class="container">

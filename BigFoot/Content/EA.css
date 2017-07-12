@@ -1,10 +1,25 @@
+#bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* Preserve aspet ratio */
+    min-width: 100%;
+    min-height: 100%;
+}
+
 body {
-    background-image:url(/Custom/backdrop.jpg);
+    /*background-image:url(/Custom/backdrop.jpg);
     background-repeat:no-repeat;
-    background-size:contain;
+    background-size:contain;*/
     padding-bottom: 40px;
     color: #634082;
 
+}
+
+#titbg {
+    background-image:url(/Custom/foot.png);
+    background-repeat:repeat-x;
+    background-size:contain;
 }
 
 h2 {
@@ -46,7 +61,7 @@ h2 {
 }
 
 .EApic:hover .EAtext {
-    opacity: 0.9;
+    opacity: 0.8;
     text-align: justify;
     color: #634082;
     padding: 10px;
@@ -62,7 +77,7 @@ h2 {
 .pots {
     margin-top: 0px;
     background-color: #82663A;
-    opacity: 0.8;
+    opacity: 0.80;
     margin-right: 35px;
     margin-left: 35px;
     padding-right: 15px;

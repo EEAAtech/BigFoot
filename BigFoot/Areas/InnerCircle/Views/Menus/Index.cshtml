@@ -1,0 +1,67 @@
+﻿@model IEnumerable<BigFoot.Menus>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New Menu", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Menu)
+        </th>
+        <th>
+            SubMenus
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr style="background-color:darkslategrey; color:antiquewhite">
+        <td>
+            <strong>
+                @Html.DisplayFor(modelItem => item.Menu)
+            </strong>
+        </td>
+        <td>
+            @if (item.PageID != null)
+            {
+                @Html.DisplayFor(modelItem => item.Pages.Page);
+             }
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MenuID }) |  
+            @Html.ActionLink("SubMenus", "Details", new { id = item.MenuID }) |  
+            @Html.ActionLink("Delete", "Delete", new { id=item.MenuID })
+        </td>
+    </tr>
+    
+    var sitems = item.SubMenus;
+    
+    <tr>
+        <td></td>
+        <td>
+            <table width="70%">
+            @foreach (var sitem in sitems)
+            {
+                <tr>
+                    <td>@sitem.SubMenu</td>
+                    <td>
+                    @if (sitem.PageID != null)
+                    {
+                        @sitem.Pages.Page;
+                    }
+                    </td>
+                </tr>
+            }
+            </table>
+        </td>
+        <td></td>
+    </tr>
+    }
+
+</table>

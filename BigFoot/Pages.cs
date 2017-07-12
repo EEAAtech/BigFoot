@@ -18,6 +18,8 @@ namespace BigFoot
         public Pages()
         {
             this.Content = new HashSet<Content>();
+            this.Menus = new HashSet<Menus>();
+            this.SubMenus = new HashSet<SubMenus>();
         }
     
         public int PageID { get; set; }
@@ -25,5 +27,9 @@ namespace BigFoot
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Content> Content { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Menus> Menus { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SubMenus> SubMenus { get; set; }
     }
 }

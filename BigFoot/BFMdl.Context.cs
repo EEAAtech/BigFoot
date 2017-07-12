@@ -29,5 +29,7 @@ namespace BigFoot
         public virtual DbSet<UserData> UserDatas { get; set; }
         public virtual DbSet<ContentTypes> ContentTypes { get; set; }
         public virtual DbSet<Pages> Pages { get; set; }
+        public virtual DbSet<Menus> Menus { get; set; }
+        public virtual DbSet<SubMenus> SubMenus { get; set; }
     }
 }
