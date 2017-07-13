@@ -1,3 +1,16 @@
+.DefaultHead {
+    font-variant-caps: small-caps;
+    font-weight: 700;
+    color: darkgreen;
+    text-align:left;
+}
+
+.DefaultBody {
+    font-weight: 300;
+    font-size:medium;
+    color: darkred;
+}
+
 #bg {
     position: fixed;
     top: 0;
@@ -44,7 +57,7 @@ h2 {
 
 
 .EApic {
-    width: 324px;
+    width: 314px;
     height: 432px;
 }
 
@@ -54,7 +67,7 @@ h2 {
 }
 
 .EAtext {
-    width: 324px;
+    width: 314px;
     height: 432px;
     background: #FFF;
     opacity: 0;

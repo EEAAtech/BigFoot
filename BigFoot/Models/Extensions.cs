@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Web;
 
+
 namespace BigFoot
 {
     public class Extensions
@@ -13,6 +14,7 @@ namespace BigFoot
 
     public static class MyExtensions
     {
+        
         /// <summary>
         /// Crop the blank parts out of an image
         /// </summary>

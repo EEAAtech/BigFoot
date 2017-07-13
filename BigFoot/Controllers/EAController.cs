@@ -10,30 +10,30 @@ namespace BigFoot.Controllers
     public class EAController : Controller
     {
         // GET: EA
-        protected override void OnActionExecuting(ActionExecutingContext filterContext)
-        {
-            if (DateTime.Now.Date > DateTime.Parse("15 Aug 2017"))
-            {                
-                filterContext.Result = new RedirectResult("~/Home/pli");
-                return;
-            }
+    //    protected override void OnActionExecuting(ActionExecutingContext filterContext)
+    //    {
+    //        if (DateTime.Now.Date > DateTime.Parse("15 Aug 2017"))
+    //        {                
+    //            filterContext.Result = new RedirectResult("~/Home/pli");
+    //            return;
+    //        }
             
-        }
+    //    }
 
-        protected override void OnException(ExceptionContext filterContext)
-        {
-            if (!filterContext.ExceptionHandled)
-            {
-                string controller = filterContext.RouteData.Values["controller"].ToString();
-                string action = filterContext.RouteData.Values["action"].ToString();
-                Exception ex = filterContext.Exception;
+    //    //protected override void OnException(ExceptionContext filterContext)
+    //    //{
+    //    //    if (!filterContext.ExceptionHandled)
+    //    //    {
+    //    //        string controller = filterContext.RouteData.Values["controller"].ToString();
+    //    //        string action = filterContext.RouteData.Values["action"].ToString();
+    //    //        Exception ex = filterContext.Exception;
 
-                filterContext.Result = new ViewResult {
-                    ViewName = "Error",
-                    ViewData = new ViewDataDictionary(new HandleErrorInfo(ex, controller, action))
-                };
-                filterContext.ExceptionHandled = true;
-            }
-        }
+    //    //        filterContext.Result = new ViewResult {
+    //    //            ViewName = "Error",
+    //    //            ViewData = new ViewDataDictionary(new HandleErrorInfo(ex, controller, action))
+    //    //        };
+    //    //        filterContext.ExceptionHandled = true;
+    //    //    }
+    //    //}
     }
 }

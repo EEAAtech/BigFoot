@@ -1,9 +1,11 @@
 ﻿@model IEnumerable<BigFoot.Content>
 
+
+
 <div id="titbg">
     <h2>@ViewBag.Title</h2>
 </div>
-@*<img src="~/Custom/foot.png" width="350px" id="Titlefoot" />*@
+
 
 
 @{ 
@@ -16,7 +18,7 @@
         <div class="panel panel-default text-center ">
             
 
-            <div class="panel-body EApic" style="background: url(@p.ImagPath) no-repeat; background-size:contain;">
+            <div class="panel-body EApic" style="background: url(/Pictures/@p.ImagPath) no-repeat; background-size:contain;">
                 <div class="EAtext">
             @foreach (var d in p.UserDatas)
             {

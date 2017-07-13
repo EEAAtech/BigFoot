@@ -1,26 +1,134 @@
-﻿@model BigFoot.Pages
+﻿@model BigFoot.Areas.InnerCircle.Models.PageImages
+
+<style>
+    table {
+        
+    }
+
+        table th {
+            font-weight: 800 !important;
+            font-size:x-large;
+            border-bottom: 1px solid grey;
+        }
+
+        table td {
+            padding: 10px !important;
+            border-bottom: 1px solid grey;
+        }
+        table textarea {
+            max-width:none;
+            width:inherit;
+        }
+
+        .form-control {
+            display:initial;
+        }
+</style>
+
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Content of Page: " + ViewBag.PageData.Page;
 }
+<h1>@ViewBag.Title</h1>
+        <hr />
 
-<h2>Details</h2>
 
-<div>
-    <h4>Pages</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Page)
-        </dt>
+@*Form to add CONTENT *@
+@using (Html.BeginForm("CreateContent", "Pages", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.Hidden("PageID", (int)ViewBag.PageData.PageID)
+        <h3><u>Add Pictures</u></h3>
+    <div class="form-inline" >
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <dd>
-            @Html.DisplayFor(model => model.Page)
-        </dd>
+        <div class="form-group">
+            <label class="control-label col-md-2">Picture:</label>
+            <div class="col-md-10">
+                <input class="form-control" type="file" id="UploadedFile" name="UploadedFile" />
+            </div>
+        </div>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.PageID }) |
+        <div class="form-group">
+            @Html.LabelFor(model => model.Position,"Rank:", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Position, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Position, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />                
+            </div>
+        </div>
+    </div>
+}
+<p style="float:right;">
     @Html.ActionLink("Back to List", "Index")
 </p>
+<hr />
+<table width="100%">
+    <tr>
+        <th width="30%">Pictures</th>
+        <th width="70%">Text</th>
+    </tr>
+
+    @foreach (Content c in ViewBag.con)
+    {
+        <tr>
+            <td width="30%">
+                <h3>@c.ImagPath.Substring(c.ImagPath.LastIndexOf('_') + 1)</h3>
+                @Html.ActionLink("Plunge","ContentShift",new { id = c.ContentID}, null)
+                @Html.ActionLink("Delete (if empty)", "ContentDelete", new { id = c.ContentID }, null)
+                <img style="display:inline;" src="/Pictures/@c.ImagPath" width="300px;" />
+            </td>
+            <td width="70%">
+
+
+                @*Form to add USERDATA *@
+                @using (Html.BeginForm("CreateUserData", "Pages", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("ContentID", (int)c.ContentID)
+                    <div class="form-horizontal" style="border-bottom:1px solid grey;">
+                        
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Text</label>
+                            <div class="col-md-10">
+                                @Html.TextArea("Udata", new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Type</label>
+                            <div class="col-md-8">
+                                @Html.DropDownList("ContentTypeID", null, htmlAttributes: new { @class = "form-control" })
+                                <input type="submit" value="Create" class="btn btn-default" />
+                            </div>
+                            <div class="col-md-offset-10 col-md-2">
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                }
+                <br />
+                <table width="100%">
+                    @foreach (var u in c.UserDatas)
+                    {
+                        <tr>
+                            <td width="30%">@Html.ActionLink("Delete", "UserDataDelete", new { id = u.UDID },null) &nbsp; @u.ContentTypes.ContentType</td>
+                            <td width="70%">@u.Udata</td>
+                        </tr>
+                    }
+                </table>
+
+
+
+
+            </td>
+        </tr>
+    }
+</table>
+

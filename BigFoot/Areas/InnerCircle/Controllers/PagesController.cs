@@ -32,7 +32,12 @@ namespace BigFoot.Areas.InnerCircle.Controllers
             {
                 return HttpNotFound();
             }
-            return View(pages);
+
+            ViewBag.PageData = pages;
+            ViewBag.ContentTypeID = new SelectList(db.ContentTypes, "ContentTypeID", "ContentType");
+            ViewBag.con = db.Contents.Where(c => c.PageID == id).OrderBy(c=>c.Position).ThenBy(c=>c.ContentID).Include(c => c.UserDatas);
+
+            return View("Details");
         }
 
         // GET: InnerCircle/Pages/Create
@@ -114,6 +119,103 @@ namespace BigFoot.Areas.InnerCircle.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        /// <summary>
+        /// Methods of CONTENT start here
+        /// </summary>
+        /// <param name="content"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateContent([Bind(Include = "ContentID,PageID,UploadedFile,Position")] Models.PageImages content)
+        {
+            if (ModelState.IsValid)
+            {
+                if (content.UploadedFile != null)
+                {
+                    string fn = content.UploadedFile.FileName.Substring(content.UploadedFile.FileName.LastIndexOf('\\') + 1);
+                    fn = content.PageID + "_" + fn;
+                    string SavePath = System.IO.Path.Combine(Server.MapPath("~/Pictures/"), fn);
+                    content.UploadedFile.SaveAs(SavePath);
+
+                    //System.Drawing.Bitmap upimg = new System.Drawing.Bitmap(content.UploadedFile.InputStream);
+                    //System.Drawing.Bitmap svimg = MyExtensions.CropUnwantedBackground(upimg);
+                    //svimg.Save(System.IO.Path.Combine(Server.MapPath("~/" + db.Config.FirstOrDefault().ImageSavePath), fn));
+
+                    Content con = new Content
+                    {
+                        PageID = content.PageID,
+                        ImagPath = fn,
+                        Position = (byte)content.Position         
+                    };
+
+                    db.Contents.Add(con);
+                    db.SaveChanges();
+                    return RedirectToAction("Details", new { id = content.PageID });
+                }
+                else
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            }
+           
+            return RedirectToAction("Details", new { id = content.PageID });
+        }
+
+        public ActionResult ContentShift(int id)
+        {
+            //Shifting downwards and then ordering by the position
+            var c = db.Contents.Find(id);
+            c.Position++;
+            db.Entry(c).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Details", new { id = c.PageID});
+        }
+
+        public ActionResult ContentDelete(int id)
+        {
+            var c = db.Contents.Find(id);
+            int PageID = (int)c.PageID;
+            //Honor this only if there is no text. This prevents accedental deletions
+            if (!db.UserDatas.Any(u => u.ContentID == id))
+            {
+                db.Contents.Remove(c);
+                db.SaveChanges();
+            }
+            return RedirectToAction("Details", new { id = PageID });
+
+        }
+
+        /// <summary>
+        /// Methods of USERDATA are here
+        /// </summary>
+        /// <param name="userData"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateUserData([Bind(Include = "UDID,ContentID,ContentTypeID,Udata")] UserData userData)
+        {
+            int PageID = (int) db.Contents.FirstOrDefault(c => c.ContentID == userData.ContentID).PageID;
+            if (ModelState.IsValid)
+            {
+                db.UserDatas.Add(userData);
+                db.SaveChanges();
+                return RedirectToAction("Details", new { id = PageID });
+            }
+                        
+            return RedirectToAction("Details", new { id = PageID });
+        }
+
+        public ActionResult UserDataDelete(int id)
+        {
+            var c = db.UserDatas.Find(id);
+            int PageID = (int)c.Content.PageID;
+            db.UserDatas.Remove(c);
+            db.SaveChanges();
+            
+            return RedirectToAction("Details", new { id = PageID });
+
+        }
+
 
         protected override void Dispose(bool disposing)
         {
