@@ -316,6 +316,7 @@
     <Content Include="Custom\Emblem.png" />
     <Content Include="Custom\foot.png" />
     <Content Include="Custom\HeaderRaised.jpg" />
+    <Content Include="Custom\IntroA.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
