@@ -45,9 +45,14 @@ namespace BigFoot.Controllers
 
             IEnumerable<BigFoot.Content> cont;
             
-                cont = db.Contents.Where(c => c.PageID == 1).OrderBy(c => c.Position);
-                
-                return View("Legend",cont);
+            cont = db.Contents.Where(c => c.PageID == 1).OrderBy(c => c.Position);
+
+            ViewBag.Images = System.IO.Directory.EnumerateFiles(Server.MapPath("/Pictures/Prayers"))
+                             .Select(fn => "/Pictures/Prayers/" + System.IO.Path.GetFileName(fn));
+
+
+
+            return View("Legend",cont);
             
             
         }
