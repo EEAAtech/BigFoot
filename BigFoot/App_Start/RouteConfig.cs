@@ -13,6 +13,11 @@ namespace BigFoot
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapRoute(
+            name: "Legend",
+            url: "Legend-of-the-Big-Foot/",
+            defaults: new { controller = "Home", action = "Legend"}
+            );
 
             routes.MapRoute(
             name: "MainSite",

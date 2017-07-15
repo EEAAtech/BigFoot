@@ -39,11 +39,17 @@ namespace BigFoot.Controllers
             return PartialView(m);
         }
 
-        public ActionResult Contact()
+        public ActionResult Legend()
         {
             ViewBag.Message = "Your contact page.";
 
-            return View();
+            IEnumerable<BigFoot.Content> cont;
+            
+                cont = db.Contents.Where(c => c.PageID == 1).OrderBy(c => c.Position);
+                
+                return View("Legend",cont);
+            
+            
         }
     }
 }

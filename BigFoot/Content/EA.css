@@ -100,6 +100,10 @@ h2 {
     transition: opacity 0.5s ease-in-out;
 }
 
+.container-fluid {
+    padding-right: 0px;
+    padding-left: 0px;
+}
 
 .pots {
     margin-top: 0px;
@@ -107,8 +111,8 @@ h2 {
     opacity: 0.80;
     margin-right: 35px;
     margin-left: 35px;
-    padding-right: 15px;
-    padding-left: 15px;
+    /*padding-right: 15px;
+    padding-left: 15px;*/
 }
 
 .row {

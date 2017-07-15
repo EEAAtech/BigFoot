@@ -1,0 +1,201 @@
+﻿@{
+ 
+    Layout = "";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An educational center for preservation of Art, Culture and Environment">
+    <meta name="author" content="Erryl Alvares">
+    <title>@ViewBag.Title - Big Foot Goa</title>
+
+    <link rel="icon" href="~/Custom/logo.ico">
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/css")
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .EApic {
+            /*width: 314px;*/
+            height: 332px;
+        }
+
+        .EAtext {
+            /*width: 314px;*/
+            height: 332px;
+            background: #FFF;
+            opacity: 0;
+        }
+
+        .pEApic {
+            /*width: 314px;*/
+            height: 132px;
+            opacity: 0.5;
+            z-index: 3000;
+        }
+
+        .pEAtext {
+            /*width: 314px;*/
+            z-index: 3000;
+            background: #FFF;
+            opacity: 0.1;
+        }
+
+        .pEApic:hover .pEAtext {
+            opacity: 0.8;
+            text-align: justify;            
+            padding: 10px;            
+            -webkit-transition: opacity 0.5s ease-out;
+            -moz-transition: opacity 0.5s ease-in-out;
+            -o-transition: opacity 0.5s ease-in-out;
+            -ms-transition: opacity 0.5s ease-in-out;
+            transition: opacity 0.5s ease-in-out;
+            z-index:3000;
+        }
+
+        #titbg {
+            margin-top:15px;
+            margin-bottom:10px;
+        }
+    </style>
+</head>
+<body>
+    @Html.Action("MainMenu", "Home")
+    @*@Html.Partial("_MenuPartial")*@
+
+
+    @Scripts.Render("~/bundles/jquery")
+    <img src="~/Custom/backdrop.jpg" id="bg" alt="">
+
+
+    <div id="TopBody" class="container">
+        <div id="pricing " class="container-fluid pots">
+            
+
+            @model IEnumerable<BigFoot.Content>
+
+            
+
+            <div id="titbg">
+                <h2 style="margin:0; padding-left:30px;">The Legend Of The Big Foot</h2>
+                <h3 style="font-family:'Copperplate Gothic'; font-size:large; position:relative; left:300px; margin:0; color:antiquewhite;"> - Where wishes come true</h3>
+            </div>
+            
+            @*<img src="~/Pictures/BGfoot.jpg" width="100%" style="opacity:1; margin-bottom:15px; margin-top:15px;"/>*@
+            <div  class="col-sm-12" style="background: url(~/Pictures/BGfoot.jpg) no-repeat; background-size:cover; height:630px; margin-bottom:10px;" >
+                <div class="pEApic" style="background: url(/Custom/Prayer.png) no-repeat; margin-left:30px; " >
+                    <div class="pEAtext DefaultBody">
+                        <p>Some loving words of gratitude</p>
+                    </div>
+                </div>
+            </div>
+
+            @foreach (var p in Model)
+            {
+                <div class="col-sm-6 col-xs-12 ">
+                    <div class="panel panel-default text-center ">
+
+                        @*<div class="panel-body EApic" style="background: url(/Pictures/@p.ImagPath) no-repeat; background-size:cover;">*@
+                        <div class="panel-body EApic" style="background: url(/Pictures/@p.ImagPath) no-repeat; background-size:cover;">
+                            <div class="EAtext">
+                                @foreach (var d in p.UserDatas)
+                                {
+
+
+                                    @Html.Raw(d.ContentTypes.PreHTML);
+                                    @d.Udata;
+                                    @Html.Raw(d.ContentTypes.PostHTML);
+
+
+
+                                }
+                            </div>
+                        </div>
+
+
+                        @*closing divs of row*@
+                    </div>
+
+                </div>
+            }
+
+
+
+
+        </div>
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Erryl Alvares</p>
+        </footer>
+    </div>
+    <div class="featurette-divider">
+    </div>
+    @Scripts.Render("~/bundles/bootstrap")
+    @*@RenderSection("scripts", required: false)*@
+
+    <script>
+    $(document).ready(function () {
+        // Add smooth scrolling to all links in navbar + footer link
+        $(".navbar a, footer a").on('click', function (event) {
+            // Make sure this.hash has a value before overriding default behavior
+            if (this.hash !== "") {
+                // Prevent default anchor click behavior
+                event.preventDefault();
+
+                // Store hash
+                var hash = this.hash;
+
+                // Using jQuery's animate() method to add smooth page scroll
+                // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+                $('html, body').animate({
+                    scrollTop: $(hash).offset().top
+                }, 900, function () {
+
+                    // Add hash (#) to URL when done scrolling (default click behavior)
+                    window.location.hash = hash;
+                });
+            } // End if
+        });
+
+        $(function () {
+            $(".slideanim").each(function () {
+                var pos = $(this).offset().top;
+
+                var winTop = $(window).scrollTop();
+                if (pos < winTop + 600) {
+                    $(this).addClass("slide");
+                }
+            });
+        });
+
+        $(window).scroll(function () {
+            $("#nextappearing").each(function () {
+                var pos = $(this).offset().top;
+
+                var winTop = $(window).scrollTop();
+                if (pos < winTop + 600) {
+                    $(this).addClass("slide");
+                }
+            });
+        });
+
+    })
+
+
+    </script>
+
+
+</body>
+
+</html>
