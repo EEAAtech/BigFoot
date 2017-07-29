@@ -39,7 +39,12 @@
         <div class="form-group">
             <label class="control-label col-md-2">Page</label>
             <div class="col-md-10">
-                <input type="text" value="@Model.Pages.Page" id="Page" name="Page" style="color:black;" data-autocomplete-idholder="#PageID" data-autocombo-url="@Url.Action("AutoCompletePages")" class="form-control" />                
+                @if (Model.Pages != null)
+                {
+                    <input type="text" value="@Model.Pages.Page" id="Page" name="Page" style="color:black;" data-autocomplete-idholder="#PageID" data-autocombo-url="@Url.Action("AutoCompletePages")" class="form-control" />
+                } else { 
+                    <input type="text" id="Page" name="Page" style="color:black;" data-autocomplete-idholder="#PageID" data-autocombo-url="@Url.Action("AutoCompletePages")" class="form-control" />
+                }
             </div>
         </div>
 
@@ -52,7 +57,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Details" , new { id = Model.MenuID })
 </div>
 
 @section Scripts {

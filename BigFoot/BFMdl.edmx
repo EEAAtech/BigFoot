@@ -39,6 +39,7 @@
           </Key>
           <Property Name="PageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Page" Type="varchar" MaxLength="50" />
+          <Property Name="IsHandMade" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="SubMenus">
           <Key>
@@ -265,6 +266,7 @@
           <NavigationProperty Name="Content" Relationship="BigFootModel.FK_Content_ToPages" FromRole="Pages" ToRole="Content" />
           <NavigationProperty Name="Menus" Relationship="BigFootModel.FK_Menus_ToPages" FromRole="Pages" ToRole="Menus" />
           <NavigationProperty Name="SubMenus" Relationship="BigFootModel.FK_SubMenus_ToPages" FromRole="Pages" ToRole="SubMenus" />
+          <Property Name="IsHandMade" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_Content_ToPages">
           <End Type="BigFootModel.Pages" Role="Pages" Multiplicity="0..1" />
@@ -377,6 +379,7 @@
           <EntitySetMapping Name="Pages">
             <EntityTypeMapping TypeName="BigFootModel.Pages">
               <MappingFragment StoreEntitySet="Pages">
+                <ScalarProperty Name="IsHandMade" ColumnName="IsHandMade" />
                 <ScalarProperty Name="Page" ColumnName="Page" />
                 <ScalarProperty Name="PageID" ColumnName="PageID" />
               </MappingFragment>

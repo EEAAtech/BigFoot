@@ -24,6 +24,7 @@ namespace BigFoot
     
         public int PageID { get; set; }
         public string Page { get; set; }
+        public bool IsHandMade { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Content> Content { get; set; }

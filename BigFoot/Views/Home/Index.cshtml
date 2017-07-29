@@ -67,7 +67,7 @@
 <body>
 
     @Scripts.Render("~/bundles/jquery")
-
+    @Scripts.Render("~/bundles/bootstrap")
     <div id="splashscreen">
         <img src="~/Custom/footwalkAll.gif" id="footwalk" alt="">
         <a href="#"><img src="~/Custom/Emblem.png"  id="embl" alt="Big Foot Goa" /> </a>     
@@ -81,7 +81,7 @@
 
     <script>
         $('#embl').click(function () {
-            $(this).parent().fadeOut(500);
+            $("#splashscreen").fadeOut(500);
             $('#fi').fadeIn(300);
         });
 

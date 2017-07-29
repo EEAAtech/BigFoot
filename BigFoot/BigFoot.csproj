@@ -310,6 +310,7 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="CreateDB.txt" />
     <Content Include="Custom\backdrop.jpg" />
     <Content Include="Custom\BBS.ico" />
     <Content Include="Custom\EAwell.jpg" />
@@ -321,7 +322,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Pictures\Huskers.jpg" />
     <Content Include="Reset.sql" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -380,6 +380,7 @@
     <Content Include="Areas\InnerCircle\Views\Menus\EditSubMenu.cshtml" />
     <Content Include="Areas\InnerCircle\Views\SubMenus\Index.cshtml" />
     <Content Include="Areas\InnerCircle\Views\Menus\ConfDeleteSubMenu.cshtml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -441,6 +442,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Pictures\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

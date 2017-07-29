@@ -25,7 +25,8 @@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.PageID }) |
             @Html.ActionLink("Content", "Details", new { id=item.PageID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PageID })
+            @if (!item.IsHandMade)
+            { @Html.ActionLink("Delete", "Delete", new { id = item.PageID }) }
         </td>
     </tr>
    

@@ -72,7 +72,8 @@ h2 {
 
 .EApic {
     /*width: 314px;*/
-    height: 432px;
+    height: 532px;
+    background: rgba(255,255,255,1);
 }
 
 
@@ -82,7 +83,7 @@ h2 {
 
 .EAtext {
     /*width: 314px;*/
-    height: 432px;
+    height: 532px;
     background: #FFF;
     opacity: 0;
 }
@@ -108,7 +109,7 @@ h2 {
 .pots {
     margin-top: 0px;
     background-color: #82663A;
-    opacity: 0.80;
+    opacity: 0.95;
     margin-right: 35px;
     margin-left: 35px;
     /*padding-right: 15px;
