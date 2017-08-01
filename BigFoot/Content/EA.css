@@ -7,8 +7,8 @@
 
 .DefaultBody {
     font-weight: 300;
+    color: darkred;
     font-size:medium;
-    color: darkblue;
 }
 
 #bg {
