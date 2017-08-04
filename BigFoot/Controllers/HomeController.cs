@@ -39,9 +39,22 @@ namespace BigFoot.Controllers
             return PartialView(m);
         }
 
+        public ActionResult Mirabai()
+        {
+            ViewBag.Message = "Record Created in 30 days.";
+
+            IEnumerable<BigFoot.Content> cont;
+
+            cont = db.Contents.Where(c => c.PageID == 1).OrderBy(c => c.Position);
+                     
+            return View("Mirabai", cont);
+
+
+        }
+
         public ActionResult Legend()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Legend of the Big Foot.";
 
             IEnumerable<BigFoot.Content> cont;
             
@@ -56,5 +69,6 @@ namespace BigFoot.Controllers
             
             
         }
+
     }
 }

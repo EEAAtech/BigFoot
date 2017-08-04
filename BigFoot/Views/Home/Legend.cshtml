@@ -28,12 +28,12 @@
     <style>
         .EApic {
             /*width: 314px;*/
-            height: 332px;
+            height: 532px;
         }
 
         .EAtext {
             /*width: 314px;*/
-            height: 332px;
+            height: 532px;
             background: #FFF;
             opacity: 0;
         }
@@ -47,15 +47,16 @@
 </head>
 <body>
     @Html.Action("MainMenu", "Home")
-    @*@Html.Partial("_MenuPartial")*@
+    
 
 
     @Scripts.Render("~/bundles/jquery")
-    <img src="~/Custom/backdrop.jpg" id="bg" alt="">
+    <img src="~/Custom/Shellless.jpg" id="bg" alt="">
+    <img src="~/Custom/shell.png" style="position:fixed; right:-38px; bottom: -45px;">
 
 
-    <div id="TopBody" class="container">
-        <div id="pricing " class="container-fluid pots">
+    <div id="TopBody" class="container-fluid">
+        <div id="pricing " class="container-fluid pots" style="margin-right: 130px;margin-left: 40px;">
             
 
             @model IEnumerable<BigFoot.Content>
@@ -74,7 +75,7 @@
                 <div id="myCarousel" class="carousel slide text-center" data-ride="carousel">
                     <!-- Indicators -->
                     <ol class="carousel-indicators">
-                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        @*<li data-target="#myCarousel" data-slide-to="0" class="active"></li>*@
                         @{ int i = 0; }
                         @foreach (var image in (IEnumerable<string>)ViewBag.Images)
                         {

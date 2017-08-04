@@ -14,6 +14,12 @@ namespace BigFoot
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+            name: "Mirabai",
+            url: "Indians-Longest-Laterite-Sculpture/",
+            defaults: new { controller = "Home", action = "Mirabai" }
+            );
+
+            routes.MapRoute(
             name: "Legend",
             url: "Legend-of-the-Big-Foot/",
             defaults: new { controller = "Home", action = "Legend"}

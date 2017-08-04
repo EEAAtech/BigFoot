@@ -1,0 +1,205 @@
+﻿@{
+ 
+    Layout = "";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An educational center for preservation of Art, Culture and Environment">
+    <meta name="author" content="Erryl Alvares">
+    <title>@ViewBag.Title - Big Foot Goa</title>
+
+    <link rel="icon" href="~/Custom/logo.ico">
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/css")
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .EApic {
+            /*width: 314px;*/
+            height: 532px;
+        }
+
+        .EAtext {
+            /*width: 314px;*/
+            height: 532px;
+            background: #FFF;
+            opacity: 0;
+        }
+
+    
+        #titbg {
+            margin-top:15px;
+            margin-bottom:10px;
+        }
+    </style>
+
+    <style type="text/css">
+        #scroller {
+            position: relative;
+        }
+
+            #scroller .innerScrollArea {
+                overflow: hidden;
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+            }
+
+            #scroller ul {
+                padding: 0;
+                margin: 0;
+                position: relative;
+            }
+
+            #scroller li {
+                padding: 0;
+                margin: 0;
+                list-style-type: none;
+                position: absolute;
+            }
+    </style>
+
+</head>
+<body>
+    @Html.Action("MainMenu", "Home")
+    
+
+
+    @Scripts.Render("~/bundles/jquery")
+    <img src="~/Custom/Shellless.jpg" id="bg" alt="">
+    <img src="~/Custom/shell.png" style="position:fixed; right:-38px; bottom: -45px;">
+
+
+    <div id="TopBody" class="container-fluid">
+        <div id="pricing " class="container-fluid pots" style="margin-right: 130px;margin-left: 40px;">
+            
+
+            @model IEnumerable<BigFoot.Content>
+
+            
+
+            <div id="titbg">
+                <h2 style="margin:0; padding-left:30px;">Indian's Longest Laterite Sculpture</h2>
+                <h3 style="font-family:'Copperplate Gothic'; font-size:large; position:relative; left:300px; margin:0; color:antiquewhite;"> - Where wishes come true</h3>
+            </div>
+                        
+
+            <div id="scroller" style="width: 288px; height: 532px; margin: 0 auto;">
+                <div class="innerScrollArea">
+                    <ul>
+                        <!-- Define photos here -->
+                        <li><img src="~/Pictures/Mirabai/Mirabai16.jpg" height="532" /></li>
+                        <li><img src="~/Pictures/Mirabai/Mirabai15.jpg" height="532" /></li>
+                        <li><img src="~/Pictures/Mirabai/Mirabai16.jpg" height="532" /></li>
+                        <li><img src="~/Pictures/Mirabai/Mirabai15.jpg" height="532" /></li>
+                    </ul>
+                </div>
+            </div>
+
+
+            
+
+
+            @foreach(var p in Model)
+                        {
+                <div class="col-sm-6 col-xs-12">
+                    <div class="panel panel-default text-center">
+
+                        @*<div class="panel-body EApic" style="background: url(/Pictures/@p.ImagPath) no-repeat; background-size:cover;">*@
+                        <div class="panel-body EApic" style="background: url(/Pictures/@p.ImagPath) no-repeat; background-size:cover;">
+                            <div class="EAtext">
+                                @foreach (var d in p.UserDatas)
+                                {
+
+
+                                    @Html.Raw(d.ContentTypes.PreHTML);
+                                    @d.Udata;
+                                    @Html.Raw(d.ContentTypes.PostHTML);
+
+
+
+                                }
+                            </div>
+                        </div>
+
+
+                        @*closing divs of row*@
+                    </div>
+
+                </div>
+            }
+
+
+
+
+        </div>
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Erryl Alvares</p>
+        </footer>
+    </div>
+    <div class="featurette-divider">
+    </div>
+    @Scripts.Render("~/bundles/bootstrap")
+    @*@RenderSection("scripts", required: false)*@
+
+    <script type="text/javascript">
+       $(function () {
+           var scroller = $('#scroller div.innerScrollArea');
+           var scrollerContent = scroller.children('ul');
+           scrollerContent.children().clone().appendTo(scrollerContent);
+           var curX = 0;
+           scrollerContent.children().each(function () {
+               var $this = $(this);
+               $this.css('left', curX);
+               curX += $this.outerWidth(true);
+           });
+           var fullW = curX / 2;
+           var viewportW = scroller.width();
+
+           // Scrolling speed management
+           var controller = { curSpeed: 0, fullSpeed: 2 };
+           var $controller = $(controller);
+           var tweenToNewSpeed = function (newSpeed, duration) {
+               if (duration === undefined)
+                   duration = 600;
+               $controller.stop(true).animate({ curSpeed: newSpeed }, duration);
+           };
+
+           // Pause on hover
+           scroller.hover(function () {
+               tweenToNewSpeed(0);
+           }, function () {
+               tweenToNewSpeed(controller.fullSpeed);
+           });
+
+           // Scrolling management; start the automatical scrolling
+           var doScroll = function () {
+               var curX = scroller.scrollLeft();
+               var newX = curX + controller.curSpeed;
+               if (newX > fullW * 2 - viewportW)
+                   newX -= fullW;
+               scroller.scrollLeft(newX);
+           };
+           setInterval(doScroll, 20);
+           tweenToNewSpeed(controller.fullSpeed);
+       });
+    </script>
+
+</body>
+
+</html>

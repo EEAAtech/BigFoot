@@ -1,13 +1,13 @@
 .DefaultHead {
     font-variant-caps: small-caps;
-    font-weight: 700;
+    font-size: 30px;
     color: darkgreen;
     text-align:left;
 }
 
 .DefaultBody {
     font-weight: 300;
-    font-size:medium;
+    font-size: 25px;
     color: darkred;
 }
 
