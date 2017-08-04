@@ -93,30 +93,35 @@
             
 
             <div id="titbg">
-                <h2 style="margin:0; padding-left:30px;">Indian's Longest Laterite Sculpture</h2>
-                <h3 style="font-family:'Copperplate Gothic'; font-size:large; position:relative; left:300px; margin:0; color:antiquewhite;"> - Where wishes come true</h3>
+                <h2 style="margin:0; padding-left:30px;">Saint Mirabai: Indian's Longest Laterite Sculpture</h2>
+                <h3 style="font-family:'Copperplate Gothic'; font-size:large; position:relative; left:300px; margin:0; color:antiquewhite;"> - Carved out in record speed of just 30 days.</h3>
             </div>
                         
 
-            <div id="scroller" style="width: 288px; height: 532px; margin: 0 auto;">
-                <div class="innerScrollArea">
-                    <ul>
-                        <!-- Define photos here -->
-                        <li><img src="~/Pictures/Mirabai/Mirabai16.jpg" height="532" /></li>
-                        <li><img src="~/Pictures/Mirabai/Mirabai15.jpg" height="532" /></li>
-                        <li><img src="~/Pictures/Mirabai/Mirabai16.jpg" height="532" /></li>
-                        <li><img src="~/Pictures/Mirabai/Mirabai15.jpg" height="532" /></li>
-                    </ul>
-                </div>
-            </div>
+            @* http://www.dwuser.com/education/content/creating-a-jquery-image-scroller/ *@
 
 
-            
+            <div class="col-sm-4 col-xs-12"  id="scroller" style="height: 532px">
+                        <div class="innerScrollArea">
+                            <ul>
+                                <!-- Define photos here -->
+                                <li><img src="~/Pictures/Mirabai/Mirabai16.jpg" height="532" /></li>
+                                <li><img src="~/Pictures/Mirabai/Mirabai15.jpg" height="532" /></li>
+                                <li><img src="~/Pictures/Mirabai/Mirabai16.jpg" height="532" /></li>
+                                <li><img src="~/Pictures/Mirabai/Mirabai15.jpg" height="532" /></li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+ 
+
+
 
 
             @foreach(var p in Model)
                         {
-                <div class="col-sm-6 col-xs-12">
+                <div class="col-sm-4 col-xs-12">
                     <div class="panel panel-default text-center">
 
                         @*<div class="panel-body EApic" style="background: url(/Pictures/@p.ImagPath) no-repeat; background-size:cover;">*@

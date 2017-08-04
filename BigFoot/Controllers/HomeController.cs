@@ -45,7 +45,7 @@ namespace BigFoot.Controllers
 
             IEnumerable<BigFoot.Content> cont;
 
-            cont = db.Contents.Where(c => c.PageID == 1).OrderBy(c => c.Position);
+            cont = db.Contents.Where(c => c.PageID == 11).OrderBy(c => c.Position);
                      
             return View("Mirabai", cont);
 
