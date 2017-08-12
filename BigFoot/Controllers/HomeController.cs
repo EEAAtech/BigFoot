@@ -52,6 +52,19 @@ namespace BigFoot.Controllers
 
         }
 
+        public ActionResult Information()
+        {
+            ViewBag.Message = "All you need to know.";
+
+            IEnumerable<BigFoot.Content> cont;
+
+            cont = db.Contents.Where(c => c.PageID == 12).OrderBy(c => c.Position);
+
+            return View("Information", cont);
+
+
+        }
+
         public ActionResult Legend()
         {
             ViewBag.Message = "Legend of the Big Foot.";

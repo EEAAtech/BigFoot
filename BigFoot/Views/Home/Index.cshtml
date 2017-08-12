@@ -77,17 +77,18 @@
     <div id="fi" style="display:none;">
         @Html.Action("MainMenu", "Home");
         <img src="~/Custom/IntroC.jpg" id="bg" alt="">
-<div>just something to play with git</div>
+
     </div>
 
     <script>
-        $('#embl').click(function () {
-            $("#splashscreen").fadeOut(500);
-            $('#fi').fadeIn(300);
-        });
-
         $("#splashscreen").delay(8000).fadeOut("slow");
         $('#fi').delay(8000).fadeIn(800);
+
+        $('#splashscreen').click(function () {
+            $("#splashscreen").clearQueue().delay(0).fadeOut('fast')
+            $('#fi').clearQueue().delay(0).fadeIn('fast');            
+        });
+
     </script>
 
 </body>

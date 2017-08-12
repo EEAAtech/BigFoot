@@ -20,6 +20,12 @@ namespace BigFoot
             );
 
             routes.MapRoute(
+            name: "Information",
+            url: "Information/",
+            defaults: new { controller = "Home", action = "Information" }
+            );
+
+            routes.MapRoute(
             name: "Legend",
             url: "Legend-of-the-Big-Foot/",
             defaults: new { controller = "Home", action = "Legend"}

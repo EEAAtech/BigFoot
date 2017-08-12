@@ -186,7 +186,7 @@
           <Property Name="UDID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ContentID" Type="Int32" />
           <Property Name="ContentTypeID" Type="Int32" />
-          <Property Name="Udata" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Udata" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Content" Relationship="Self.FK_UserData_ToContent" FromRole="UserData" ToRole="Content" />
           <NavigationProperty Name="ContentTypes" Relationship="BigFootModel.FK_UserData_ToContentType" FromRole="UserData" ToRole="ContentTypes" />
         </EntityType>

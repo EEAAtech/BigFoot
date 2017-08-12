@@ -35,7 +35,7 @@ namespace BigFoot.Areas.InnerCircle.Controllers
 
             ViewBag.PageData = pages;
             ViewBag.ContentTypeID = new SelectList(db.ContentTypes, "ContentTypeID", "ContentType");
-            ViewBag.con = db.Contents.Where(c => c.PageID == id).OrderBy(c=>c.Position).ThenBy(c=>c.ContentID).Include(c => c.UserDatas);
+            ViewBag.con = db.Contents.Where(c => c.PageID == id).OrderByDescending(c=>c.Position).ThenBy(c=>c.ContentID).Include(c => c.UserDatas);
 
             return View("Details");
         }

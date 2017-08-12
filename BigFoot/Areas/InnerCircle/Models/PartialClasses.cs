@@ -15,7 +15,7 @@ namespace BigFoot.Areas.InnerCircle.Models
         public int PageID { get; set; }
         public HttpPostedFileBase UploadedFile { get; set; }
                 
-        [Range(0,12)]
+        [Range(0,100)]
         public int Position { get; set; }
     }
 }
