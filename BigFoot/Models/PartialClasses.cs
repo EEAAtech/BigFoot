@@ -10,6 +10,26 @@ using System.Web;
 
 namespace BigFoot
 {
+    public class PartialClasses
+    {
+    }
+
+    public class UsercommentsImage
+    {
+        public int Id { get; set; }
+        [Required]
+        public string Name { get; set; }
+        [Required]
+        [Phone]
+        public string PhoneNumber { get; set; }
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+        [Required]
+        public string Comments { get; set; }
+        public string Path { get; set; }
+        public HttpPostedFileBase UploadedFile { get; set; }
+    }
     //[MetadataType(typeof(ConfigMetadata))]
     //public partial class Config
     //{
@@ -104,7 +124,7 @@ namespace BigFoot
     //    [Display(Name = "Drivers Lic. Expiry Date")]
     //    [RequiredIf(CompareToInt =1)] //EmpTypeID 1 has to be driver
     //    public Nullable<System.DateTime> DrivLicExp { get; set; }
-        
+
     //}
 
     ///// <summary>
@@ -203,7 +223,7 @@ namespace BigFoot
     //{
     //    public int EmpID { get; set; }
     //    public DateTime Dayt { get; set; }
-        
+
     //    public bool IsLeave { get; set; }
     //}
 
@@ -242,7 +262,7 @@ namespace BigFoot
     //                return ValidationResult.Success;
     //            comparer = " less than or equal to ";
     //        }
-            
+
     //        return new ValidationResult(ErrorMessage ?? "Make sure your date is " + comparer + CompareDate.ToString("dd-MMM-yyyy"));
     //    }
 
@@ -251,7 +271,7 @@ namespace BigFoot
     //public class RequiredIfAttribute : ValidationAttribute
     //{
     //    public int CompareToInt { get; set; }
-        
+
 
     //    protected override ValidationResult IsValid(object value, ValidationContext validationContext)
     //    {

@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using BigFoot;
+using ImageResizer;
 
 namespace BigFoot.Controllers
 {
@@ -81,6 +86,74 @@ namespace BigFoot.Controllers
             return View("Legend",cont);
             
             
+        }
+
+        public ActionResult Gandhiji(int? id)
+        {
+            ViewBag.Message = "150 Years Of Gandhiji";
+            return View("Gandhiji",id);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Gandhiji([Bind(Include = "Id,Name,PhoneNumber,Email,Comments,Path,UploadedFile")] UsercommentsImage usercomments)
+        {
+            string IP = String.Empty;
+
+            System.Web.HttpContext current = System.Web.HttpContext.Current;
+            string IPAddress = current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+
+            if(!string.IsNullOrEmpty(IPAddress))
+            {
+                string[] valAddress = IPAddress.Split('.');
+                if(valAddress.Length != 0)
+                {
+                    IP = valAddress[0];
+                }
+            }
+
+            IP = current.Request.ServerVariables["REMOTE_ADDR"];
+
+
+            if (ModelState.IsValid)
+            {
+                if (usercomments.UploadedFile != null)
+                {
+                    string fn = usercomments.UploadedFile.FileName.Substring(usercomments.UploadedFile.FileName.LastIndexOf('\\') + 1);
+                    fn = usercomments.Id + "_" + fn;
+                    usercomments.Path = "~/Pictures/" + fn;
+                    string SavePath = System.IO.Path.Combine(Server.MapPath("~/Pictures/"), fn);
+                    string DestPath = System.IO.Path.Combine(Server.MapPath("~/Pictures/"), "Small-" + fn);
+                    usercomments.UploadedFile.SaveAs(SavePath);
+
+                    ResizeSettings resizeSetting = new ResizeSettings
+                    {
+                        Width = 200,
+                        Height = 200,
+                        Format = "jpg"
+                    };
+
+                    UserComments img = new UserComments
+                    {
+                        Id = usercomments.Id,
+                        Name = usercomments.Name,
+                        Email = usercomments.Email,
+                        Comment = usercomments.Comments,
+                        Path = usercomments.Path
+                    };
+
+                    ImageBuilder.Current.Build(SavePath, DestPath, resizeSetting);
+
+                    db.UserComments.Add(img);
+                    db.SaveChanges();
+                    return RedirectToAction("Gandhiji");
+                }
+                else
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            }
+
+            return RedirectToAction("Gandhiji");
         }
 
     }
