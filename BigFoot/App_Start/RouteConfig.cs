@@ -26,9 +26,21 @@ namespace BigFoot
             );
 
             routes.MapRoute(
+           name: "Account",
+           url: "Account/{action}",
+           defaults: new { controller = "Account", action = "Login" }
+           );
+
+            routes.MapRoute(
             name: "Legend",
             url: "Legend-of-the-Big-Foot/",
             defaults: new { controller = "Home", action = "Legend"}
+            );
+
+            routes.MapRoute(
+            name: "GandhijiPage",
+            url: "Gandhiji/",
+            defaults: new { controller = "Home", action = "Gandhiji" }
             );
 
             routes.MapRoute(
@@ -42,9 +54,7 @@ namespace BigFoot
             url: "{ignorMen}/{id}/",
             defaults: new { controller = "Home", action = "About", id = UrlParameter.Optional }
             );
-
-            
-
+                        
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

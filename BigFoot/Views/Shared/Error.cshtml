@@ -7,6 +7,14 @@
 <h1 class="text-danger">Error!</h1>
 <h2 class="text-danger">@Model.Exception.Message  .</h2>
 
+<h3>Exception details (if any) follow:</h3>
+@{ var e = @Model.Exception; }
+@while (e.InnerException != null)
+{
+    e = e.InnerException;
+    <div class="alert alert-warning">@e.InnerException.Message</div>
+}
+
 <br />
-@Model.ControllerName  &nbsp; @Model.ActionName
+The Error occured at: @Model.ControllerName  &nbsp; >>> @Model.ActionName
 
