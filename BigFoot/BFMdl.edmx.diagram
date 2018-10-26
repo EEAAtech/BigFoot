@@ -17,6 +17,7 @@
         <AssociationConnector Association="BigFootModel.FK_SubMenus_ToMenu" />
         <AssociationConnector Association="BigFootModel.FK_Menus_ToPages" />
         <AssociationConnector Association="BigFootModel.FK_SubMenus_ToPages" />
+        <EntityTypeShape EntityType="BigFootModel.UserComments" Width="1.5" PointX="7.375" PointY="0.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

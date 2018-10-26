@@ -51,6 +51,17 @@
           <Property Name="smUrl" Type="varchar" MaxLength="300" />
           <Property Name="MenuID" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="UserComments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Comment" Type="varchar" MaxLength="300" />
+          <Property Name="Path" Type="varchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="UserData">
           <Key>
             <PropertyRef Name="UDID" />
@@ -58,7 +69,7 @@
           <Property Name="UDID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ContentID" Type="int" />
           <Property Name="ContentTypeID" Type="int" />
-          <Property Name="Udata" Type="varchar" MaxLength="300" />
+          <Property Name="Udata" Type="varchar(max)" />
         </EntityType>
         <Association Name="FK_Content_ToPages">
           <End Role="Pages" Type="Self.Pages" Multiplicity="0..1" />
@@ -138,6 +149,7 @@
           <EntitySet Name="Menus" EntityType="Self.Menus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pages" EntityType="Self.Pages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubMenus" EntityType="Self.SubMenus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserComments" EntityType="Self.UserComments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserData" EntityType="Self.UserData" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Content_ToPages" Association="Self.FK_Content_ToPages">
             <End Role="Pages" EntitySet="Pages" />
@@ -233,6 +245,7 @@
             <End Role="Pages" EntitySet="Pages" />
             <End Role="SubMenus" EntitySet="SubMenus" />
           </AssociationSet>
+          <EntitySet Name="UserComments" EntityType="BigFootModel.UserComments" />
         </EntityContainer>
         <EntityType Name="ContentTypes">
           <Key>
@@ -339,6 +352,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="UserComments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Comment" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Path" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -403,6 +427,18 @@
                 <ScalarProperty Name="smUrl" ColumnName="smUrl" />
                 <ScalarProperty Name="SubMenu" ColumnName="SubMenu" />
                 <ScalarProperty Name="SubMenuID" ColumnName="SubMenuID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserComments">
+            <EntityTypeMapping TypeName="BigFootModel.UserComments">
+              <MappingFragment StoreEntitySet="UserComments">
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

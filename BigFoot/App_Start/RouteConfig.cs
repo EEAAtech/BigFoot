@@ -34,11 +34,11 @@ namespace BigFoot
             routes.MapRoute(
             name: "Legend",
             url: "Legend-of-the-Big-Foot/",
-            defaults: new { controller = "Home", action = "Legend"}
+            defaults: new { controller = "Home", action = "Legend" }
             );
 
             routes.MapRoute(
-            name: "GandhijiPage",
+            name: "Gandhiji",
             url: "Gandhiji/",
             defaults: new { controller = "Home", action = "Gandhiji" }
             );
@@ -54,7 +54,7 @@ namespace BigFoot
             url: "{ignorMen}/{id}/",
             defaults: new { controller = "Home", action = "About", id = UrlParameter.Optional }
             );
-                        
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

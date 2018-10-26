@@ -31,5 +31,6 @@ namespace BigFoot
         public virtual DbSet<Pages> Pages { get; set; }
         public virtual DbSet<Menus> Menus { get; set; }
         public virtual DbSet<SubMenus> SubMenus { get; set; }
+        public virtual DbSet<UserComments> UserComments { get; set; }
     }
 }
