@@ -28,7 +28,13 @@ namespace BigFoot
             routes.MapRoute(
             name: "Legend",
             url: "Legend-of-the-Big-Foot/",
-            defaults: new { controller = "Home", action = "Legend"}
+            defaults: new { controller = "Home", action = "Legend" }
+            );
+
+            routes.MapRoute(
+            name: "Gandhiji",
+            url: "Gandhiji/",
+            defaults: new { controller = "Home", action = "Gandhiji" }
             );
 
             routes.MapRoute(
@@ -43,7 +49,7 @@ namespace BigFoot
             defaults: new { controller = "Home", action = "About", id = UrlParameter.Optional }
             );
 
-            
+
 
             routes.MapRoute(
                 name: "Default",
