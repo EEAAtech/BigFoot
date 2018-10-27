@@ -91,7 +91,17 @@ namespace BigFoot.Controllers
         public ActionResult Gandhiji(int? id)
         {
             ViewBag.Message = "150 Years Of Gandhiji";
-            return View("Gandhiji",id);
+
+            // ViewBag.Images = System.IO.Directory.EnumerateFiles(Server.MapPath("/Pictures/"))
+            //     .Select(fn => "/Pictures/" + System.IO.Path.GetFileName(fn));
+
+            //  IEnumerable<BigFoot.UserComments> cont;
+
+            //  cont = db.UserComments.Where(c => c.Id == 1).OrderBy(c => c.Id);
+
+            ViewBag.user = db.UserComments.Where(c => c.Id == 1).OrderBy(c => c.Id).ToList();
+
+            return View("Gandhiji");
         }
 
         [HttpPost]
@@ -137,6 +147,7 @@ namespace BigFoot.Controllers
                     {
                         Id = usercomments.Id,
                         Name = usercomments.Name,
+                        PhoneNumber = usercomments.PhoneNumber,
                         Email = usercomments.Email,
                         Comment = usercomments.Comments,
                         Path = usercomments.Path

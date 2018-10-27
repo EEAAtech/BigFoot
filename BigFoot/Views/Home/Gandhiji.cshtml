@@ -18,7 +18,7 @@
     @Styles.Render("~/Content/css")
 
 
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug --> 
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -56,6 +56,7 @@
 
     <div id="TopBody" class="container-fluid">
         <div id="pricing " class="container-fluid pots" style="margin-right: 130px; margin-left: 40px;">
+
             <div id="titbg">
                 <h2 style="margin:0; padding-left:30px;">150 Years Of Gandhiji</h2>
             </div>
@@ -69,61 +70,90 @@
             </p>
 
 
+            <div class="alert alert-success" id="snackbar">Your Form has been Successfully Submitted!</div>
+
             @model BigFoot.UsercommentsImage
             @using (Html.BeginForm("Gandhiji", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        @Html.AntiForgeryToken()
-        <h4 style="margin-left:30px;">User Comments</h4>
-        <div class="form-horizontal">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.Name, "Name", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-                </div>
-            </div>
+            {
+                @Html.AntiForgeryToken()
+                <h4 style="margin-left:30px;">User Comments</h4>
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Name, "Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.PhoneNumber, "Phone Number", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
-                </div>
-            </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PhoneNumber, "Phone Number", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                </div>
-            </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.Comments,  new { @class = "form-control" } )
-                    @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
-                </div>
-            </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.Comments, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-            <div class="form-group">
-                <label class="control-label col-md-2">Picture:</label>
-                <div class="col-md-10">
-                    <input class="form-control" type="file" id="UploadedFile" name="UploadedFile" />
-                </div>
-            </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Picture:</label>
+                        <div class="col-md-10">
+                            <input class="form-control" type="file" id="UploadedFile" name="UploadedFile" />
+                        </div>
+                    </div>
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Submit" class="btn btn-default" />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Submit" class="btn btn-default" />
+                        </div>
+                    </div>
                 </div>
-            </div>
+            }
+
+
+
+            @{
+                var Users = (IEnumerable<UserComments>)ViewBag.user;
+            }
+
+            @foreach (var item in Users)
+            {
+                <div class="col-sm-6 col-xs-12">
+                    <div class="panel panel-default text-center">
+
+                        @*<div class="panel-body EApic" style="background: url(/Pictures/@p.ImagPath) no-repeat; background-size:cover;">*@
+                        <div class="panel-body EApic" style="background: url(/Pictures/@item.Path) no-repeat; background-size:cover;">
+                            <div class="EAtext">
+                                    @Html.Raw(item.Name)
+                                    <br />
+                                    @Html.Raw(item.Comment)
+                            </div>
+                        </div>
+
+
+                        @*closing divs of row*@
+                    </div>
+
+                </div>
+            }
         </div>
-}
 
-        </div>
 
         <footer>
             <p>&copy; @DateTime.Now.Year - Erryl Alvares</p>
@@ -132,7 +162,61 @@
     <div class="featurette-divider">
     </div>
     @Scripts.Render("~/bundles/bootstrap")
+    @*@RenderSection("scripts", required: false)*@
 
+    <script>
+        $(document).ready(function () {
+            // Add smooth scrolling to all links in navbar + footer link
+            $(".navbar a, footer a").on('click', function (event) {
+                // Make sure this.hash has a value before overriding default behavior
+                if (this.hash !== "") {
+                    // Prevent default anchor click behavior
+                    event.preventDefault();
+
+                    // Store hash
+                    var hash = this.hash;
+
+                    // Using jQuery's animate() method to add smooth page scroll
+                    // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+                    $('html, body').animate({
+                        scrollTop: $(hash).offset().top
+                    }, 900, function () {
+
+                        // Add hash (#) to URL when done scrolling (default click behavior)
+                        window.location.hash = hash;
+                    });
+                } // End if
+            });
+
+            $(function () {
+                $(".slideanim").each(function () {
+                    var pos = $(this).offset().top;
+
+                    var winTop = $(window).scrollTop();
+                    if (pos < winTop + 600) {
+                        $(this).addClass("slide");
+                    }
+                });
+            });
+
+            $(window).scroll(function () {
+                $("#nextappearing").each(function () {
+                    var pos = $(this).offset().top;
+
+                    var winTop = $(window).scrollTop();
+                    if (pos < winTop + 600) {
+                        $(this).addClass("slide");
+                    }
+                });
+            });
+
+            $("#snackbar").css("display","none");
+            $(".btn").on("click", function () {
+                $("#snackbar").css("display","block");
+            });
+        })
+
+    </script>
 
 
 </body>
