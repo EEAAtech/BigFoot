@@ -99,7 +99,7 @@ namespace BigFoot.Controllers
 
             //  cont = db.UserComments.Where(c => c.Id == 1).OrderBy(c => c.Id);
 
-            ViewBag.user = db.UserComments.Where(c => c.Id == 1).OrderBy(c => c.Id).ToList();
+            ViewBag.user = db.UserComments.OrderBy(c => c.Id).ToList();
 
             return View("Gandhiji");
         }
@@ -131,15 +131,12 @@ namespace BigFoot.Controllers
                 {
                     string fn = usercomments.UploadedFile.FileName.Substring(usercomments.UploadedFile.FileName.LastIndexOf('\\') + 1);
                     fn = usercomments.Id + "_" + fn;
-                    usercomments.Path = "~/Pictures/" + fn;
-                    string SavePath = System.IO.Path.Combine(Server.MapPath("~/Pictures/"), fn);
+                                        
                     string DestPath = System.IO.Path.Combine(Server.MapPath("~/Pictures/"), "Small-" + fn);
-                    usercomments.UploadedFile.SaveAs(SavePath);
-
+                    
                     ResizeSettings resizeSetting = new ResizeSettings
-                    {
-                        Width = 200,
-                        Height = 200,
+                    {                        
+                        Height = 432,                        
                         Format = "jpg"
                     };
 
@@ -149,11 +146,12 @@ namespace BigFoot.Controllers
                         Name = usercomments.Name,
                         PhoneNumber = usercomments.PhoneNumber,
                         Email = usercomments.Email,
-                        Comment = usercomments.Comments,
-                        Path = usercomments.Path
+                        Comment = usercomments.Comments.Substring(0,Math.Min(995,usercomments.Comments.Length)),
+                        Path = "Small-" + fn
                     };
 
-                    ImageBuilder.Current.Build(SavePath, DestPath, resizeSetting);
+                    //ImageBuilder.Current.Build(SavePath, DestPath, resizeSetting);
+                    ImageBuilder.Current.Build(usercomments.UploadedFile, DestPath, resizeSetting);
 
                     db.UserComments.Add(img);
                     db.SaveChanges();
