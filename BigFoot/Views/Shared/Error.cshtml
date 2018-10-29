@@ -1,20 +1,20 @@
 ﻿@model System.Web.Mvc.HandleErrorInfo
 
-@{
-    ViewBag.Title = "Error";
-}
+<div class="row">
+    <div class="col-2"><img class="pt-3" src="~/Custom/error_robot.gif" width="100%" /></div>
+    <div class="col-10">
+        <h1 class="text-danger">Oops! We encountered a problem!</h1>
+        <p>Please contact your software provider <strong>EEAAtech</strong> with the details below:</p>
+        <h2 class="text-danger">@Model.Exception.Message  .</h2>
 
-<h1 class="text-danger">Error!</h1>
-<h2 class="text-danger">@Model.Exception.Message  .</h2>
-
-<h3>Exception details (if any) follow:</h3>
-@{ var e = @Model.Exception; }
-@while (e.InnerException != null)
-{
-    e = e.InnerException;
-    <div class="alert alert-warning">@e.InnerException.Message</div>
-}
-
+        <h3>Exception details (if any) follow:</h3>
+        @{ var e = @Model.Exception; }
+        @while (e.InnerException != null)
+        {
+            <div class="alert alert-warning">@e.InnerException.Message</div>
+            e = e.InnerException;
+        }
+        The Error occured at: @Model.ControllerName  &nbsp; >>> @Model.ActionName
+    </div>
+</div>
 <br />
-The Error occured at: @Model.ControllerName  &nbsp; >>> @Model.ActionName
-

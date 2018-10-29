@@ -323,6 +323,7 @@
     <Content Include="Custom\BBS.ico" />
     <Content Include="Custom\EAwell.jpg" />
     <Content Include="Custom\Emblem.png" />
+    <Content Include="Custom\error_robot.gif" />
     <Content Include="Custom\foot.png" />
     <Content Include="Custom\IntroA.jpg" />
     <Content Include="favicon.ico" />
