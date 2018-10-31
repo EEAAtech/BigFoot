@@ -26,7 +26,8 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
@@ -41,13 +42,62 @@
             @Html.DisplayFor(modelItem => item.Comment)
         </td>
         <td>
-            <img src="@item.Path"/>
+            <img src="@item.Path" />
         </td>
-        <td>
-            @Html.ActionLink("Show", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Hide", "Details", new { id=item.Id }) |
-        </td>
+
+        @if (item.IsShow == null)
+        {
+            <td class="col-sm-1">
+                <input type="button" value="Show" class="approve btn btn-primary" data-id="@item.Id" />
+            </td>
+            <td class="col-sm-1">
+                <input type="button" value="Hide" class="reject btn btn-danger" data-id="@item.Id" />
+            </td>
+        }
+        else if (item.IsShow == true)
+        {
+            <td class="col-sm-1">
+                <input type="button" value="Hide" class="reject btn btn-danger" data-id="@item.Id" />
+            </td>
+        }
+        else if (item.IsShow == false)
+        {
+            <td class="col-sm-1">
+                <input type="button" value="Show" class="approve btn btn-primary" data-id="@item.Id" />
+            </td>
+        }
+
     </tr>
-}
+    }
 
 </table>
+
+<script>
+    $(document).ready(function () {
+
+        $('.approve').on("click", function () {
+            var selectedId = $(this).data("id");
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("ShowHide", "GandhijiApprove")",
+                data: { id: selectedId, update: true },
+            });
+            $(this).prop("disabled", true);
+        });
+
+        $('.reject').on("click", function () {
+            var selectedId = $(this).data("id");
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("ShowHide", "GandhijiApprove")",
+                data: { id: selectedId, update: false }
+            });
+            $(this).prop("disabled", true);
+        });
+
+    });
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

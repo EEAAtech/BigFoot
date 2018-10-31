@@ -77,6 +77,26 @@ p {
     z-index: 300;
 }
 
+.navbar > .navbar-right > a {
+    animation-duration: 1200ms;
+    animation-name: blink;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    -webkit-animation: blink 1200ms infinite; /* Safari and Chrome */
+}
+
+@keyframes blink {
+    from {
+        color: yellow
+    }
+
+    to {
+        color: white;
+    }
+}
+
+}
+
 
 #Titlefoot {
     position: absolute;
