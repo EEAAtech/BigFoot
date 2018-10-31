@@ -92,8 +92,8 @@ namespace BigFoot.Controllers
         {
             ViewBag.Message = "150 Years Of Gandhiji";
 
-            ViewBag.user = db.UserComments.Where(d => d.IsShow == true).OrderBy(c => c.Id).ToList();
 
+            ViewBag.user = db.UserComments.Where(d => d.IsShow == true).OrderBy(c => c.Id).ToList();
             return View("Gandhiji");
         }
 
@@ -108,10 +108,10 @@ namespace BigFoot.Controllers
                     string fn = usercomments.UploadedFile.FileName.Substring(usercomments.UploadedFile.FileName.LastIndexOf('\\') + 1);
                     fn = usercomments.Id + "_" + fn;
                     string DestPath = System.IO.Path.Combine(Server.MapPath("~/Pictures/"), "Small-" + fn);
-
+                    
                     ResizeSettings resizeSetting = new ResizeSettings
-                    {
-                        Height = 432,
+                    {                        
+                        Height = 432,                        
                         Format = "jpg"
                     };
 

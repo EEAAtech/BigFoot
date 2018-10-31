@@ -12,7 +12,7 @@ using BigFoot.Models;
 namespace BigFoot.Controllers
 {
     [Authorize]
-    public class ManageController : EAController
+    public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;

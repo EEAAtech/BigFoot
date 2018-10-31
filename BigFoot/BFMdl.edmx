@@ -59,7 +59,7 @@
           <Property Name="Name" Type="varchar" MaxLength="100" />
           <Property Name="PhoneNumber" Type="varchar" MaxLength="50" />
           <Property Name="Email" Type="varchar" MaxLength="50" />
-          <Property Name="Comment" Type="varchar" MaxLength="300" />
+          <Property Name="Comment" Type="varchar" MaxLength="1000" />
           <Property Name="Path" Type="varchar" MaxLength="100" />
           <Property Name="IsShow" Type="bit" />
           <Property Name="Ip" Type="varchar" MaxLength="50" />
@@ -362,7 +362,7 @@
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Comment" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Comment" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="Path" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="IsShow" Type="Boolean" />
           <Property Name="Ip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />

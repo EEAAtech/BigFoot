@@ -10,7 +10,7 @@ using BigFoot;
 
 namespace BigFoot.Areas.InnerCircle.Controllers
 {
-    public class MenusController : Controller
+    public class MenusController : EAIController
     {
         private BigFootEntities db = new BigFootEntities();
 
