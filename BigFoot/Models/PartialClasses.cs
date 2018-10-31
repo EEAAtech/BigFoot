@@ -28,6 +28,8 @@ namespace BigFoot
         [Required]
         public string Comments { get; set; }
         public string Path { get; set; }
+        public string Ip { get; set; }
+        public Nullable<bool> IsShow { get; set; }
         public HttpPostedFileBase UploadedFile { get; set; }
     }
     //[MetadataType(typeof(ConfigMetadata))]

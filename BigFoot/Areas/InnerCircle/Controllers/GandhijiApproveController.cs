@@ -11,7 +11,6 @@ using BigFoot;
 namespace BigFoot.Areas.InnerCircle.Controllers
 {
     public class GandhijiApproveController : EAIController
-
     {
         private BigFootEntities db = new BigFootEntities();
 
@@ -19,6 +18,20 @@ namespace BigFoot.Areas.InnerCircle.Controllers
         public ActionResult Index()
         {
             return View(db.UserComments.ToList().OrderByDescending(c => c.Id));
+        }
+
+
+        [HttpPost]
+        public bool ShowHide(int id, bool update)
+        {
+            var user = db.UserComments.Find(id);
+            if (TryUpdateModel(user))
+            {
+                user.IsShow = update;
+                db.SaveChanges();
+                return true;
+            }
+            return false;
         }
     }
 }

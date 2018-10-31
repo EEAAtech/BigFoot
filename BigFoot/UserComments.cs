@@ -20,5 +20,7 @@ namespace BigFoot
         public string Email { get; set; }
         public string Comment { get; set; }
         public string Path { get; set; }
+        public Nullable<bool> IsShow { get; set; }
+        public string Ip { get; set; }
     }
 }

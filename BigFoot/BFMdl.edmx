@@ -61,6 +61,8 @@
           <Property Name="Email" Type="varchar" MaxLength="50" />
           <Property Name="Comment" Type="varchar" MaxLength="1000" />
           <Property Name="Path" Type="varchar" MaxLength="100" />
+          <Property Name="IsShow" Type="bit" />
+          <Property Name="Ip" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="UserData">
           <Key>
@@ -362,6 +364,8 @@
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Comment" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="Path" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IsShow" Type="Boolean" />
+          <Property Name="Ip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -433,6 +437,8 @@
           <EntitySetMapping Name="UserComments">
             <EntityTypeMapping TypeName="BigFootModel.UserComments">
               <MappingFragment StoreEntitySet="UserComments">
+                <ScalarProperty Name="Ip" ColumnName="Ip" />
+                <ScalarProperty Name="IsShow" ColumnName="IsShow" />
                 <ScalarProperty Name="Path" ColumnName="Path" />
                 <ScalarProperty Name="Comment" ColumnName="Comment" />
                 <ScalarProperty Name="Email" ColumnName="Email" />

@@ -92,15 +92,8 @@ namespace BigFoot.Controllers
         {
             ViewBag.Message = "150 Years Of Gandhiji";
 
-            // ViewBag.Images = System.IO.Directory.EnumerateFiles(Server.MapPath("/Pictures/"))
-            //     .Select(fn => "/Pictures/" + System.IO.Path.GetFileName(fn));
 
-            //  IEnumerable<BigFoot.UserComments> cont;
-
-            //  cont = db.UserComments.Where(c => c.Id == 1).OrderBy(c => c.Id);
-
-            ViewBag.user = db.UserComments.OrderBy(c => c.Id).ToList();
-
+            ViewBag.user = db.UserComments.Where(d => d.IsShow == true).OrderBy(c => c.Id).ToList();
             return View("Gandhiji");
         }
 
@@ -108,30 +101,12 @@ namespace BigFoot.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Gandhiji([Bind(Include = "Id,Name,PhoneNumber,Email,Comments,Path,UploadedFile")] UsercommentsImage usercomments)
         {
-            string IP = String.Empty;
-
-            System.Web.HttpContext current = System.Web.HttpContext.Current;
-            string IPAddress = current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-
-            if(!string.IsNullOrEmpty(IPAddress))
-            {
-                string[] valAddress = IPAddress.Split('.');
-                if(valAddress.Length != 0)
-                {
-                    IP = valAddress[0];
-                }
-            }
-
-            IP = current.Request.ServerVariables["REMOTE_ADDR"];
-
-
             if (ModelState.IsValid)
             {
                 if (usercomments.UploadedFile != null)
                 {
                     string fn = usercomments.UploadedFile.FileName.Substring(usercomments.UploadedFile.FileName.LastIndexOf('\\') + 1);
                     fn = usercomments.Id + "_" + fn;
-                                        
                     string DestPath = System.IO.Path.Combine(Server.MapPath("~/Pictures/"), "Small-" + fn);
                     
                     ResizeSettings resizeSetting = new ResizeSettings
@@ -150,7 +125,6 @@ namespace BigFoot.Controllers
                         Path = "Small-" + fn
                     };
 
-                    //ImageBuilder.Current.Build(SavePath, DestPath, resizeSetting);
                     ImageBuilder.Current.Build(usercomments.UploadedFile, DestPath, resizeSetting);
 
                     db.UserComments.Add(img);
@@ -165,5 +139,26 @@ namespace BigFoot.Controllers
             return RedirectToAction("Gandhiji");
         }
 
+
+        public void Get_Ip()
+        {
+            string IP = String.Empty;
+
+            System.Web.HttpContext current = System.Web.HttpContext.Current;
+
+            string IPAddress = current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+
+            if (!string.IsNullOrEmpty(IPAddress))
+            {
+                string[] valAddress = IPAddress.Split('.');
+                if (valAddress.Length != 0)
+                {
+                    IP = valAddress[0];
+                }
+            }
+
+            IP = current.Request.ServerVariables["REMOTE_ADDR"];
+
+        }
     }
 }
