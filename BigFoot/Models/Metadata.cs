@@ -7,6 +7,29 @@ using System.Web;
 
 namespace BigFoot
 {
+    public class UserCommentsMetadata
+    {        
+        public int Id { get; set; }
+        [Required]
+        [MaxLength(100, ErrorMessage = "Name cannot be more than 100 characters")]
+        public string Name { get; set; }
+        [Required]
+        [MaxLength(50, ErrorMessage = "Phone number cannot be more than 50 characters")]
+        [Phone]
+        public string PhoneNumber { get; set; }
+        [Required]
+        [MaxLength(50, ErrorMessage = "Email cannot be more than 50 characters")]
+        [EmailAddress]
+        public string Email { get; set; }
+        [Required]
+        [MaxLength(1000, ErrorMessage = "Comments cannot be more than 1000 characters")]
+        public string Comments { get; set; }
+        public string Path { get; set; }
+        public string Ip { get; set; }
+        public Nullable<bool> IsShow { get; set; }
+        public HttpPostedFileBase UploadedFile { get; set; }
+    }
+
     //public class ConfigMetadata
     //{
     //    [Display(Name = "Bonus Percentage")]
@@ -301,6 +324,6 @@ namespace BigFoot
     //    [Display(Name = "Reason")]
     //    public String AdjRemark;
     //}
-        
+
 
 }

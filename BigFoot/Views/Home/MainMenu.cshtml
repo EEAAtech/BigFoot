@@ -16,36 +16,38 @@
                 <a id="emblem" href="~/"><img src="~/Custom/Emblem.png" height=150px; alt="Big Foot Goa" /> </a>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                     @foreach (var m in Model)
-                     {
-                         if (m.SubMenus.Count == 0)
-                         {
+                        @foreach (var m in Model)
+                        {
+                            if (m.SubMenus.Count == 0)
+                            {
+                                <li>
+                                    <a href="@m.mUrl">@m.Menu</a>
+                                </li>
+                            }
+                            else
+                            {
+
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@m.Menu<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        @foreach (SubMenus sm in m.SubMenus)
+                                        {
+                                            <li>
+                                                <a href="/@sm.smUrl">@sm.SubMenu</a>
+                                            </li>
+                                        }
+                                    </ul>
+                                </li>
+
+
+                            }
+
+                        }
                         <li>
-                            <a href="@m.mUrl">@m.Menu</a>
+                        <a class="navflash" href="/Gandhiji">150 Years Of Gandhiji</a>
                         </li>
-                         }
-                         else
-                         {
-
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@m.Menu<span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    @foreach (SubMenus sm in m.SubMenus)
-                                    {
-                                    <li>
-                                        <a href="/@sm.smUrl">@sm.SubMenu</a>
-                                    </li>
-                                    }
-                                </ul>
-                            </li>
-
-
-                         }
-
-                     }
-
-                        
                     </ul>
+                    
                 </div>
             </div>
         </nav>
