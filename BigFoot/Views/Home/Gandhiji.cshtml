@@ -43,6 +43,11 @@
             margin-top: 15px;
             margin-bottom: 10px;
         }
+
+        .input-group
+        {
+            margin-bottom:10px;
+        }
     </style>
 </head>
 <body>
@@ -62,70 +67,67 @@
             </div>
             <div style="height:30px">&nbsp;</div>
             <hr />
-            <h2 style="font-family: 'Baskerville Old Face'">
+            <h2 style="font-family: 'Arial'">
                 Celebrating Gandhiji at Big Foot
             </h2>
-            <p style="font-family: 'Baskerville Old Face'">
-                As India celebrates Gandhiji's 149 birth anniversary, at Ancestral Goa we want to highlight his unique legacy - that of being left-handed. A little known fact about the Mahatma, this characteristic is commemorated at The World Famous Left Handers Museum at the Big Foot premises in Lotoulim, where Gandhiji and many other celebrities of note have been featured. To kick-start his 150 year, Ancestral Goa is hosting a collection drive to collect handprints of only left-handers, from 2nd October onwards. These handprints will be stamped on khadi cloth using organic colours, in keeping with Gandhi's ideals - equality. A collage featuring these handprints will be revealed a year later on 2 October 2019, Gandhi Jayanthi. Left Handers can send their hand print on cloth12"X10" with their name on it to Big Foot, Loutolim. Which will be a part of the final collage.
+            <p style="font-family: 'Arial'">
+                As India celebrates <strong>Gandhiji's 149th birth anniversary</strong>, at <strong>Ancestral Goa</strong> we want to highlight his unique legacy - that of being left-handed. A little known fact about the Mahatma, this characteristic is commemorated at The World Famous Left Handers Museum at the <strong>Big Foot</strong> premises in Lotoulim, where Gandhiji and many other celebrities of note have been featured. To kick-start his 150 year, Ancestral Goa is hosting a collection drive to collect handprints of only left-handers, from 2nd October onwards. These handprints will be stamped on khadi cloth using organic colours, in keeping with Gandhi's ideals - equality. A collage featuring these handprints will be revealed a year later on <strong>2 October 2019, Gandhi Jayanthi</strong>. Left Handers can send their hand print on cloth <strong>12"X10"</strong> with their name on it to <strong>Big Foot</strong>, Loutolim. Which will be a part of the final collage.
             </p>
-
             <div class="alert alert-success" id="snackbar">Your Form has been Successfully Submitted!</div>
-
             @model BigFoot.UsercommentsImage
-            @using (Html.BeginForm("Gandhiji", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
-            {
-                @Html.AntiForgeryToken()
-                <h4 style="margin-left:30px;">User Comments</h4>
-                <div class="form-horizontal">
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Name, "Name", htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
+            <div class="row" style="margin-top:10px;">
+                <div class="col-sm-offset-3 col-sm-6">
+                    @using (Html.BeginForm("Gandhiji", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-horizontal">
+                            <h3 class="text-center" style="font-family: Arial; margin-left:30px; color:#fff; margin:0;">User Comments</h3>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="row" style="margin:10px 0;">
+                                <div class="col-sm-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Name</span>
+                                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Email</span>
+                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.PhoneNumber, "Phone Number", htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
+                                <div class="col-sm-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Phone Number</span>
+                                        @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Picture</span>
+                                        <input class="form-control" type="file" id="UploadedFile" name="UploadedFile" />
+                                    </div>
+                                </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.TextAreaFor(model => model.Comments, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
+                           
+                                <div class="col-sm-offset-2 col-sm-8">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Comments</span>
+                                        @Html.TextAreaFor(model => model.Comments, new { @class = "form-control", @rows = 1 })
+                                        @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
 
-                    <div class="form-group">
-                        <label class="control-label col-md-2">Picture:</label>
-                        <div class="col-md-10">
-                            <input class="form-control" type="file" id="UploadedFile" name="UploadedFile" />
+                                <div class="col-sm-12 text-center">
+                                    <input type="submit" value="Submit" class="btn btn-default" />
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Submit" class="btn btn-default" />
-                        </div>
-                    </div>
+                    }
                 </div>
-            }
-
-
+            </div>
 
             @{
                 var Users = (IEnumerable<UserComments>)ViewBag.user;
@@ -133,15 +135,15 @@
 
             @foreach (var item in Users)
             {
-                <div class="col-sm-6 col-xs-12">               
+                <div class="col-sm-6 col-xs-12">
                     <div class="panel panel-default text-center">
 
                         @*<div class="panel-body EApic" style="background: url(/Pictures/@p.ImagPath) no-repeat; background-size:cover;">*@
                         <div class="panel-body EApic" style="background: url(/Pictures/@item.Path) no-repeat; background-size:cover;">
                             <div class="EAtext">
-                                    @Html.Raw(item.Name)
-                                    <br />
-                                    @Html.Raw(item.Comment)
+                                @Html.Raw(item.Name)
+                                <br />
+                                @Html.Raw(item.Comment)
                             </div>
                         </div>
 
@@ -159,6 +161,7 @@
     </div>
     <div class="featurette-divider">
     </div>
+
     @Scripts.Render("~/bundles/bootstrap")
     @*@RenderSection("scripts", required: false)*@
 
@@ -208,9 +211,9 @@
                 });
             });
 
-            $("#snackbar").css("display","none");
+            $("#snackbar").css("display", "none");
             $(".btn").on("click", function () {
-                $("#snackbar").css("display","block");
+                $("#snackbar").css("display", "block");
             });
         })
 
@@ -218,4 +221,4 @@
 
 
 </body>
-</html> 
+</html>
