@@ -77,7 +77,7 @@ p {
     z-index: 300;
 }
 
-.navbar > .navbar-right > a {
+.navflash {
     animation-duration: 1200ms;
     animation-name: blink;
     animation-iteration-count: infinite;

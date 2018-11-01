@@ -111,10 +111,10 @@ namespace BigFoot.Controllers
                     
                     ResizeSettings resizeSetting = new ResizeSettings
                     {                        
-                        Height = 432,                        
+                        Width = 324,                        
                         Format = "jpg"
                     };
-
+                    
                     UserComments img = new UserComments
                     {
                         Id = usercomments.Id,
@@ -122,7 +122,8 @@ namespace BigFoot.Controllers
                         PhoneNumber = usercomments.PhoneNumber,
                         Email = usercomments.Email,
                         Comment = usercomments.Comments.Substring(0,Math.Min(995,usercomments.Comments.Length)),
-                        Path = "Small-" + fn
+                        Path = "Small-" + fn,
+                        Ip= Get_Ip()
                     };
 
                     ImageBuilder.Current.Build(usercomments.UploadedFile, DestPath, resizeSetting);
@@ -140,7 +141,7 @@ namespace BigFoot.Controllers
         }
 
 
-        public void Get_Ip()
+        public string Get_Ip()
         {
             string IP = String.Empty;
 
@@ -153,11 +154,14 @@ namespace BigFoot.Controllers
                 string[] valAddress = IPAddress.Split('.');
                 if (valAddress.Length != 0)
                 {
-                    IP = valAddress[0];
+                    IP =valAddress[0].ToString();
                 }
             }
 
-            IP = current.Request.ServerVariables["REMOTE_ADDR"];
+            if (IP.Length<1)
+                IP = current.Request.ServerVariables["REMOTE_ADDR"];
+
+            return IP.Length > 49 ? IP.Substring(0, 49) : IP;
 
         }
     }

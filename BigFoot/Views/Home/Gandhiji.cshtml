@@ -1,4 +1,5 @@
-﻿@{
+﻿@model BigFoot.UsercommentsImage
+@{
 
     Layout = "";
 }
@@ -71,11 +72,12 @@
                 Celebrating Gandhiji at Big Foot
             </h2>
             <p style="font-family: 'Arial'">
-
                 As India celebrates <strong>Gandhiji's 149th birth anniversary</strong>, at <strong>Ancestral Goa</strong> we want to highlight his unique legacy - that of being left-handed. A little known fact about the Mahatma, this characteristic is commemorated at The World Famous Left Handers Museum at the <strong>Big Foot</strong> premises in Lotoulim, where Gandhiji and many other celebrities of note have been featured. To kick-start his 150 year, Ancestral Goa is hosting a collection drive to collect handprints of only left-handers, from 2nd October onwards. These handprints will be stamped on khadi cloth using organic colours, in keeping with Gandhi's ideals - equality. A collage featuring these handprints will be revealed a year later on <strong>2 October 2019, Gandhi Jayanthi</strong>. Left Handers can send their hand print on cloth <strong>12"X10"</strong> with their name on it to <strong>Big Foot</strong>, Loutolim. Which will be a part of the final collage.
             </p>
+            <p style="font-family: 'Arial'">
+                You could also take a selfie with your handprint and upload it for display on our website here. Don't forget to include a little description about yourself. Uploaded images typically take about a week to appear on the website.
+            </p>
             <div class="alert alert-success" id="snackbar">Your Form has been Successfully Submitted!</div>
-            @model BigFoot.UsercommentsImage
             <div class="row" style="margin-top:10px;">
                 <div class="col-sm-offset-3 col-sm-6">
                     @using (Html.BeginForm("Gandhiji", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -111,7 +113,7 @@
                                     </div>
                                 </div>
 
-                           
+
                                 <div class="col-sm-offset-2 col-sm-8">
                                     <div class="input-group">
                                         <span class="input-group-addon">Comments</span>

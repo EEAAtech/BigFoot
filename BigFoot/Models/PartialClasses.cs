@@ -14,18 +14,13 @@ namespace BigFoot
     {
     }
 
+    [MetadataType(typeof(UserCommentsMetadata))]
     public class UsercommentsImage
     {
         public int Id { get; set; }
-        [Required]
         public string Name { get; set; }
-        [Required]
-        [Phone]
         public string PhoneNumber { get; set; }
-        [Required]
-        [EmailAddress]
         public string Email { get; set; }
-        [Required]
         public string Comments { get; set; }
         public string Path { get; set; }
         public string Ip { get; set; }
