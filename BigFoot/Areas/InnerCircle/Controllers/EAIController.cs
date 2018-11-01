@@ -7,6 +7,7 @@ using System.Web.Mvc;
 namespace BigFoot.Areas.InnerCircle.Controllers
 {
     [HandleError]
+    [Authorize(Roles ="Auth")]
     public class EAIController : Controller
     {
         // GET: EA
