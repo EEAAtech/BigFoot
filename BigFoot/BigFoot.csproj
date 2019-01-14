@@ -194,6 +194,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\InnerCircle\Controllers\ContentsController.cs" />
+    <Compile Include="Areas\InnerCircle\Controllers\BlogAdminController.cs" />
     <Compile Include="Areas\InnerCircle\Controllers\ContentTypesController.cs" />
     <Compile Include="Areas\InnerCircle\Controllers\EAIController.cs" />
     <Compile Include="Areas\InnerCircle\Controllers\GandhijiApproveController.cs" />
@@ -389,6 +390,7 @@
     <Content Include="Areas\InnerCircle\Views\SubMenus\Index.cshtml" />
     <Content Include="Areas\InnerCircle\Views\Menus\ConfDeleteSubMenu.cshtml" />
     <Content Include="Areas\InnerCircle\Views\GandhijiApprove\Index.cshtml" />
+    <Content Include="Areas\InnerCircle\Views\BlogAdmin\Index.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -451,6 +453,7 @@
     <Content Include="Views\Home\Mirabai.cshtml" />
     <Content Include="Views\Home\Information.cshtml" />
     <Content Include="Views\Home\Gandhiji.cshtml" />
+    <Content Include="Views\Home\Blog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

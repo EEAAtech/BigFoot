@@ -80,7 +80,7 @@
             <div class="alert alert-success" id="snackbar">Your Form has been Successfully Submitted!</div>
             <div class="row" style="margin-top:10px;">
                 <div class="col-sm-offset-3 col-sm-6">
-                    @using (Html.BeginForm("Gandhiji", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    @using (Html.BeginForm("Gandhiji", "Home", FormMethod.Post, new { enctype = "multipart/form-data", id="gandhiFrm" }))
                     {
                         @Html.AntiForgeryToken()
                         <div class="form-horizontal">
@@ -96,7 +96,7 @@
                                     <div class="input-group">
                                         <span class="input-group-addon">Email</span>
                                         @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                        @*@Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })*@
                                     </div>
                                 </div>
 
@@ -122,13 +122,14 @@
                                     </div>
                                 </div>
 
-                                <div class="col-sm-12 text-center">
-                                    <input type="submit" value="Submit" class="btn btn-default" />
-                                </div>
                             </div>
                         </div>
 
                     }
+                                <div class="col-sm-12 text-center">
+                                    <button class="btn btn-default" >Submit</button>
+                                    @*<input type="submit" value="Submit" class="btn btn-default" />*@
+                                </div>
                 </div>
             </div>
 
@@ -214,10 +215,23 @@
                 });
             });
 
+
             $("#snackbar").css("display", "none");
             $(".btn").on("click", function () {
-                $("#snackbar").css("display", "block");
+                $.post("/Home/Gandhiji", $("#gandhFrm").serialize(), function (data) {
+                    $("#snackbar").css("display", "block");
+                    if (data.includes("html")) {
+                        $("#snackbar").html("Kindly enter valid data in all the fields");
+                    } else {
+                        $("#snackbar").html(data);
+                    }
+                }, "text")
+                    .fail(function () {
+                        alert("Kindly enter valid data in all the fields");
+                    });
+                
             });
+
         })
 
     </script>

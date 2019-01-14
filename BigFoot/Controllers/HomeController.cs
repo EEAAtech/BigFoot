@@ -88,6 +88,11 @@ namespace BigFoot.Controllers
             
         }
 
+        public ActionResult Blog()
+        {
+            return View();
+        }
+
         public ActionResult Gandhiji(int? id)
         {
             ViewBag.Message = "150 Years Of Gandhiji";
@@ -99,7 +104,7 @@ namespace BigFoot.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Gandhiji([Bind(Include = "Id,Name,PhoneNumber,Email,Comments,Path,UploadedFile")] UsercommentsImage usercomments)
+        public string Gandhiji([Bind(Include = "Id,Name,PhoneNumber,Email,Comments,Path,UploadedFile")] UsercommentsImage usercomments)
         {
             if (ModelState.IsValid)
             {
@@ -108,36 +113,44 @@ namespace BigFoot.Controllers
                     string fn = usercomments.UploadedFile.FileName.Substring(usercomments.UploadedFile.FileName.LastIndexOf('\\') + 1);
                     fn = usercomments.Id + "_" + fn;
                     string DestPath = System.IO.Path.Combine(Server.MapPath("~/Pictures/"), "Small-" + fn);
-                    
+
                     ResizeSettings resizeSetting = new ResizeSettings
-                    {                        
-                        Width = 324,                        
+                    {
+                        Width = 324,
                         Format = "jpg"
                     };
-                    
+
                     UserComments img = new UserComments
                     {
                         Id = usercomments.Id,
                         Name = usercomments.Name,
                         PhoneNumber = usercomments.PhoneNumber,
                         Email = usercomments.Email,
-                        Comment = usercomments.Comments.Substring(0,Math.Min(995,usercomments.Comments.Length)),
+                        Comment = usercomments.Comments.Substring(0, Math.Min(995, usercomments.Comments.Length)),
                         Path = "Small-" + fn,
-                        Ip= Get_Ip()
+                        Ip = Get_Ip()
                     };
 
                     ImageBuilder.Current.Build(usercomments.UploadedFile, DestPath, resizeSetting);
 
                     db.UserComments.Add(img);
                     db.SaveChanges();
-                    return RedirectToAction("Gandhiji");
+                    return "Your Form has been Successfully Submitted!";
                 }
                 else
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    return "Please choose an image to upload. Only Jpg and Png images are supported";
 
+            } else
+            {
+                string errors = "Your submission has failed for the following reasons: <BR /> ";
+                var errorList = ModelState.Values.SelectMany(m => m.Errors)
+                                 .Select(e => e.ErrorMessage)
+                                 .ToList();
+                errors += String.Join("<BR />", errorList); 
+
+                return errors;
             }
 
-            return RedirectToAction("Gandhiji");
         }
 
 
