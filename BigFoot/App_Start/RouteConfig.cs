@@ -44,6 +44,12 @@ namespace BigFoot
             );
 
             routes.MapRoute(
+            name: "Blog",
+            url: "Blog/",
+            defaults: new { controller = "Home", action = "Blog" }
+            );
+
+            routes.MapRoute(
             name: "MainSite",
             url: "{id}/",
             defaults: new { controller = "Home", action = "About", id = UrlParameter.Optional }
