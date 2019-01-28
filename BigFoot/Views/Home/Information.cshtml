@@ -55,7 +55,7 @@
 </head>
 <body>
     @Html.Action("MainMenu", "Home")
-    
+
 
 
     @Scripts.Render("~/bundles/jquery")
@@ -64,27 +64,27 @@
 
 
     <div id="TopBody" class="container-fluid">
-        <div id="pricing " class="container-fluid pots" style="margin-right: 130px;margin-left: 40px;">
-            
+        <div id="pricing" class="container-fluid pots" style="background-color: #82663A;">
+
 
             @model IEnumerable<BigFoot.Content>
 
-            
+
 
             <div id="titbg">
                 <h2 style="margin:0; padding-left:30px;">Information</h2>
-                
-            </div>
-                        
 
-            <div class="col-sm-12 col-xs-12" style="height: 400px">
+            </div>
+
+
+            <div class="col" style="height: 400px">
                 <div id="map"></div>
             </div>
             <div sstyle="height:30px">&nbsp;</div>
 
-            @foreach(var p in Model)
-                        {
-                <div class="col-sm-4 col-xs-12">
+            @foreach (var p in Model)
+            {
+                <div class="col-lg-4">
                     <div class="panel panel-default text-center">
 
                         @*<div class="panel-body EApic" style="background: url(/Pictures/@p.ImagPath) no-repeat; background-size:cover;">*@
@@ -127,22 +127,22 @@
     @*@RenderSection("scripts", required: false)*@
 
     <script>
-      function initMap() {
-          var uluru = { lat: 15.339782, lng: 73.987585};
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 12,
-          center: uluru
-        });
-        var marker = new google.maps.Marker({
-          position: uluru,
-          map: map
-        });
-      }
+        function initMap() {
+            var uluru = { lat: 15.339782, lng: 73.987585 };
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 12,
+                center: uluru
+            });
+            var marker = new google.maps.Marker({
+                position: uluru,
+                map: map
+            });
+        }
     </script>
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFqJS4TLUqwMVQb7vq7TFZGnjvbdSZ3fA&callback=initMap">
     </script>
-
+    <script src="~/Scripts/eaMobi.js"></script>
 
 </body>
 

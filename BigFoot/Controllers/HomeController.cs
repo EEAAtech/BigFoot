@@ -20,7 +20,7 @@ namespace BigFoot.Controllers
         }
 
         public ActionResult About(string id)
-        {
+        {//For all the standard pages
             if (id?.Length > 0)
             {
                 id = id.Replace('-', ' ');
