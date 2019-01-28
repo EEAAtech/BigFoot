@@ -114,7 +114,7 @@
             </div>
 
             @foreach(var p in Model)
-                        {
+             {
                 <div class="col-sm-6 col-xs-12">
                     <div class="panel panel-default text-center">
 
@@ -123,14 +123,9 @@
                             <div class="EAtext">
                                 @foreach (var d in p.UserDatas)
                                 {
-
-
                                     @Html.Raw(d.ContentTypes.PreHTML);
                                     @d.Udata;
                                     @Html.Raw(d.ContentTypes.PostHTML);
-
-
-
                                 }
                             </div>
                         </div>
@@ -140,7 +135,7 @@
                     </div>
 
                 </div>
-            }
+             }
 
 
 

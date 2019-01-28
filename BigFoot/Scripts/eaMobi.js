@@ -1,4 +1,4 @@
-﻿Pic$(function () {
+﻿$(function () {
    if (screen.width > 1024) {
         // if screen size is 1025px wide or larger
         $('#emblem').show();
