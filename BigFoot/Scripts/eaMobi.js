@@ -1,4 +1,19 @@
 ﻿$(function () {
+    //Show modal image            
+    $('#bfModal').css("display", "none");
+
+    $('.EApic').on('click', function () {
+        $('#bfModal').css("display", "block");
+        $('#popImg').attr('src', '/Pictures/' + $(this).data('imgsrc'));
+    });
+
+    $('.close').on('click', function () {
+        $('#bfModal').css("display", "none");
+    });
+
+
+
+
    if (screen.width > 1024) {
         // if screen size is 1025px wide or larger
         $('#emblem').show();

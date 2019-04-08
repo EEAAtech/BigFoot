@@ -88,14 +88,14 @@
                     <div class="panel panel-default text-center">
 
                         @*<div class="panel-body EApic" style="background: url(/Pictures/@p.ImagPath) no-repeat; background-size:cover;">*@
-                        <div class="panel-body EApic" style="background: url(/Pictures/@p.ImagPath) no-repeat; background-size:cover;">
+                        <div class="panel-body EApic" data-imgsrc="@p.ImagPath" style="background: url(/Pictures/@p.ImagPath) no-repeat; background-size:cover;">
                             <div class="EAtext">
                                 @foreach (var d in p.UserDatas)
                                 {
 
 
                                     @Html.Raw(d.ContentTypes.PreHTML);
-                                    @d.Udata;
+                                    @@Html.Raw(d.Udata);
                                     @Html.Raw(d.ContentTypes.PostHTML);
 
 
@@ -123,6 +123,8 @@
     </div>
     <div class="featurette-divider">
     </div>
+
+    @Html.Partial("_imgModal");
     @Scripts.Render("~/bundles/bootstrap")
     @*@RenderSection("scripts", required: false)*@
 
