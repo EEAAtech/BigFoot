@@ -73,12 +73,7 @@
             position:absolute;
             top:80px;
             margin:auto;
-        }
-
-        .carousel .carousel-inner img {
             width:100%;
-            height:100%;
-            min-height:300px;
         }
 
         .carousel-control .glyphicon-chevron-left, .carousel-control .icon-prev,
@@ -101,6 +96,16 @@
             border-color: #000000;
         }
 
+        #myCarousel {
+            width:100%;
+            height: 100%;
+            overflow-y:hidden;
+        }
+
+        .carousel .carousel-inner img {
+            width: 100%;
+            height: auto;
+        }
     </style>
 
     
@@ -137,15 +142,15 @@
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner">
                     <div class="item active">
-                        <img src="~/Custom/backdrop.jpg" width=100% alt="Los Angeles">
+                        <img src="~/Custom/backdrop.jpg" class="img-responsive" alt="Los Angeles">
                     </div>
 
                     <div class="item">
-                        <img src="~/Custom/backdrop.jpg" width=100% alt="Chicago">
+                        <img src="~/Custom/IntroC.jpg" class="img-responsive" alt="Chicago">
                     </div>
 
                     <div class="item">
-                        <img src="~/Custom/backdrop.jpg" width=100% alt="New York">
+                        <img src="~/Custom/IntroA.jpg" class="img-responsive" alt="New York">
                     </div>
                 </div>
 

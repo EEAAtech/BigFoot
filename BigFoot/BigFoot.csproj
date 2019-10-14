@@ -327,6 +327,7 @@
     <Content Include="Custom\error_robot.gif" />
     <Content Include="Custom\foot.png" />
     <Content Include="Custom\IntroA.jpg" />
+    <Content Include="Custom\IntroC.jpeg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
