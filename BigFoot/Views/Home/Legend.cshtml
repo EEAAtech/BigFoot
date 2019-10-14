@@ -43,11 +43,23 @@
             margin-top:15px;
             margin-bottom:10px;
         }
+
+        #myImg {
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+            #myImg:hover {
+                opacity: 0.7;
+            }
+
+
     </style>
 </head>
 <body>
     @Html.Action("MainMenu", "Home")
-    
+
 
 
     @Scripts.Render("~/bundles/jquery")
@@ -56,18 +68,18 @@
 
 
     <div id="TopBody" class="container-fluid">
-        <div id="pricing " class="container-fluid pots" style="margin-right: 130px;margin-left: 40px;">
-            
+        <div id="pricing" class="container-fluid pots" style="background-color: #82663A;">
+
 
             @model IEnumerable<BigFoot.Content>
 
-            
+
 
             <div id="titbg">
                 <h2 style="margin:0; padding-left:30px;">The Legend Of The Big Foot</h2>
                 <h3 style="font-family:'Copperplate Gothic'; font-size:large; position:relative; left:300px; margin:0; color:antiquewhite;"> - Where wishes come true</h3>
             </div>
-                        
+
             <div class="col-sm-12" style="background: url(/Pictures/BGfoot.jpg) no-repeat; background-size:cover; height:630px; margin-bottom:10px;">
 
 
@@ -89,14 +101,14 @@
                         <div class="item active">
                             <h4>&nbsp;<br><span>&nbsp;</span></h4>
                         </div>
-                        @foreach(var image in (IEnumerable<string>)ViewBag.Images)
+                        @foreach (var image in (IEnumerable<string>)ViewBag.Images)
                         {
                             <div class="item">
-                               <img src = "@image" style="max-height:500px; margin-left:auto; margin-right:auto;" />
+                                <img src="@image" style="max-height:500px; margin-left:auto; margin-right:auto;" />
                             </div>
                         }
 
-                                               
+
                     </div>
 
                     <!-- Left and right controls -->
@@ -113,24 +125,19 @@
 
             </div>
 
-            @foreach(var p in Model)
-                        {
+            @foreach (var p in Model)
+            {
                 <div class="col-sm-6 col-xs-12">
                     <div class="panel panel-default text-center">
 
                         @*<div class="panel-body EApic" style="background: url(/Pictures/@p.ImagPath) no-repeat; background-size:cover;">*@
-                        <div class="panel-body EApic" style="background: url(/Pictures/@p.ImagPath) no-repeat; background-size:cover;">
+                        <div class="panel-body EApic" data-imgsrc="@p.ImagPath" style="background: url(/Pictures/@p.ImagPath) no-repeat; background-size:cover;">
                             <div class="EAtext">
                                 @foreach (var d in p.UserDatas)
                                 {
-
-
                                     @Html.Raw(d.ContentTypes.PreHTML);
                                     @d.Udata;
                                     @Html.Raw(d.ContentTypes.PostHTML);
-
-
-
                                 }
                             </div>
                         </div>
@@ -153,60 +160,75 @@
     </div>
     <div class="featurette-divider">
     </div>
+
+    @Html.Partial("_imgModal");
+
     @Scripts.Render("~/bundles/bootstrap")
     @*@RenderSection("scripts", required: false)*@
 
     <script>
-    $(document).ready(function () {
-        // Add smooth scrolling to all links in navbar + footer link
-        $(".navbar a, footer a").on('click', function (event) {
-            // Make sure this.hash has a value before overriding default behavior
-            if (this.hash !== "") {
-                // Prevent default anchor click behavior
-                event.preventDefault();
+        $(document).ready(function () {
 
-                // Store hash
-                var hash = this.hash;
+            // Add smooth scrolling to all links in navbar + footer link
+            $(".navbar a, footer a").on('click', function (event) {
+                // Make sure this.hash has a value before overriding default behavior
+                if (this.hash !== "") {
+                    // Prevent default anchor click behavior
+                    event.preventDefault();
 
-                // Using jQuery's animate() method to add smooth page scroll
-                // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
-                $('html, body').animate({
-                    scrollTop: $(hash).offset().top
-                }, 900, function () {
+                    // Store hash
+                    var hash = this.hash;
 
-                    // Add hash (#) to URL when done scrolling (default click behavior)
-                    window.location.hash = hash;
+                    // Using jQuery's animate() method to add smooth page scroll
+                    // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+                    $('html, body').animate({
+                        scrollTop: $(hash).offset().top
+                    }, 900, function () {
+
+                        // Add hash (#) to URL when done scrolling (default click behavior)
+                        window.location.hash = hash;
+                    });
+                } // End if
+            });
+
+            $(function () {
+                $(".slideanim").each(function () {
+                    var pos = $(this).offset().top;
+
+                    var winTop = $(window).scrollTop();
+                    if (pos < winTop + 600) {
+                        $(this).addClass("slide");
+                    }
                 });
-            } // End if
-        });
-
-        $(function () {
-            $(".slideanim").each(function () {
-                var pos = $(this).offset().top;
-
-                var winTop = $(window).scrollTop();
-                if (pos < winTop + 600) {
-                    $(this).addClass("slide");
-                }
             });
-        });
 
-        $(window).scroll(function () {
-            $("#nextappearing").each(function () {
-                var pos = $(this).offset().top;
+            $(window).scroll(function () {
+                $("#nextappearing").each(function () {
+                    var pos = $(this).offset().top;
 
-                var winTop = $(window).scrollTop();
-                if (pos < winTop + 600) {
-                    $(this).addClass("slide");
-                }
+                    var winTop = $(window).scrollTop();
+                    if (pos < winTop + 600) {
+                        $(this).addClass("slide");
+                    }
+                });
             });
-        });
 
-    })
+        })
 
 
     </script>
+    <script src="~/Scripts/eaMobi.js"></script>
 
+    @*Google Analytics*@
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-137828691-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-137828691-1');
+    </script>
+    @* EOF Google Analytics*@
 
 </body>
 

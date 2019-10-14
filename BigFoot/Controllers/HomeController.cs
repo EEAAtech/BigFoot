@@ -20,7 +20,7 @@ namespace BigFoot.Controllers
         }
 
         public ActionResult About(string id)
-        {
+        {//For all the standard pages
             if (id?.Length > 0)
             {
                 id = id.Replace('-', ' ');
@@ -62,7 +62,7 @@ namespace BigFoot.Controllers
             ViewBag.Message = "All you need to know.";
 
             IEnumerable<BigFoot.Content> cont;
-
+            ViewBag.Title = "Information";
             cont = db.Contents.Where(c => c.PageID == 12).OrderBy(c => c.Position);
 
             return View("Information", cont);

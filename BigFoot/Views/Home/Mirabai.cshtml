@@ -76,7 +76,7 @@
 </head>
 <body>
     @Html.Action("MainMenu", "Home")
-    
+
 
 
     @Scripts.Render("~/bundles/jquery")
@@ -85,47 +85,47 @@
 
 
     <div id="TopBody" class="container-fluid">
-        <div id="pricing " class="container-fluid pots" style="margin-right: 130px;margin-left: 40px;">
-            
+        <div id="pricing" class="container-fluid pots" style="background-color: #82663A;">
+
 
             @model IEnumerable<BigFoot.Content>
 
-            
+
 
             <div id="titbg">
                 <h2 style="margin:0; padding-left:30px;">Saint Mirabai: Indian's Longest Laterite Sculpture</h2>
                 <h3 style="font-family:'Copperplate Gothic'; font-size:large; position:relative; left:300px; margin:0; color:antiquewhite;"> - Carved out in record speed of just 30 days.</h3>
             </div>
-                        
+
 
             @* http://www.dwuser.com/education/content/creating-a-jquery-image-scroller/ *@
 
 
-            <div class="col-sm-4 col-xs-12"  id="scroller" style="height: 532px">
-                        <div class="innerScrollArea">
-                            <ul>
-                                <!-- Define photos here -->
-                                <li><img src="~/Pictures/Mirabai/Mirabai16.jpg" height="532" /></li>
-                                <li><img src="~/Pictures/Mirabai/Mirabai15.jpg" height="532" /></li>
-                                <li><img src="~/Pictures/Mirabai/Mirabai16.jpg" height="532" /></li>
-                                <li><img src="~/Pictures/Mirabai/Mirabai15.jpg" height="532" /></li>
-                            </ul>
-                        </div>
-                    </div>
-
-
- 
+            <div class="col-lg-4" id="scroller" style="height: 532px">
+                <div class="innerScrollArea">
+                    <ul>
+                        <!-- Define photos here -->
+                        <li><img src="~/Pictures/Mirabai/Mirabai16.jpg" height="532" /></li>
+                        <li><img src="~/Pictures/Mirabai/Mirabai15.jpg" height="532" /></li>
+                        <li><img src="~/Pictures/Mirabai/Mirabai16.jpg" height="532" /></li>
+                        <li><img src="~/Pictures/Mirabai/Mirabai15.jpg" height="532" /></li>
+                    </ul>
+                </div>
+            </div>
 
 
 
 
-            @foreach(var p in Model)
-                        {
+
+
+
+            @foreach (var p in Model)
+            {
                 <div class="col-sm-4 col-xs-12">
                     <div class="panel panel-default text-center">
 
                         @*<div class="panel-body EApic" style="background: url(/Pictures/@p.ImagPath) no-repeat; background-size:cover;">*@
-                        <div class="panel-body EApic" style="background: url(/Pictures/@p.ImagPath) no-repeat; background-size:cover;">
+                        <div class="panel-body EApic" data-imgsrc="@p.ImagPath" style="background: url(/Pictures/@p.ImagPath) no-repeat; background-size:cover;">
                             <div class="EAtext">
                                 @foreach (var d in p.UserDatas)
                                 {
@@ -159,51 +159,64 @@
     </div>
     <div class="featurette-divider">
     </div>
+    @Html.Partial("_imgModal");
     @Scripts.Render("~/bundles/bootstrap")
     @*@RenderSection("scripts", required: false)*@
 
     <script type="text/javascript">
-       $(function () {
-           var scroller = $('#scroller div.innerScrollArea');
-           var scrollerContent = scroller.children('ul');
-           scrollerContent.children().clone().appendTo(scrollerContent);
-           var curX = 0;
-           scrollerContent.children().each(function () {
-               var $this = $(this);
-               $this.css('left', curX);
-               curX += $this.outerWidth(true);
-           });
-           var fullW = curX / 2;
-           var viewportW = scroller.width();
+        $(function () {
+            var scroller = $('#scroller div.innerScrollArea');
+            var scrollerContent = scroller.children('ul');
+            scrollerContent.children().clone().appendTo(scrollerContent);
+            var curX = 0;
+            scrollerContent.children().each(function () {
+                var $this = $(this);
+                $this.css('left', curX);
+                curX += $this.outerWidth(true);
+            });
+            var fullW = curX / 2;
+            var viewportW = scroller.width();
 
-           // Scrolling speed management
-           var controller = { curSpeed: 0, fullSpeed: 2 };
-           var $controller = $(controller);
-           var tweenToNewSpeed = function (newSpeed, duration) {
-               if (duration === undefined)
-                   duration = 600;
-               $controller.stop(true).animate({ curSpeed: newSpeed }, duration);
-           };
+            // Scrolling speed management
+            var controller = { curSpeed: 0, fullSpeed: 2 };
+            var $controller = $(controller);
+            var tweenToNewSpeed = function (newSpeed, duration) {
+                if (duration === undefined)
+                    duration = 600;
+                $controller.stop(true).animate({ curSpeed: newSpeed }, duration);
+            };
 
-           // Pause on hover
-           scroller.hover(function () {
-               tweenToNewSpeed(0);
-           }, function () {
-               tweenToNewSpeed(controller.fullSpeed);
-           });
+            // Pause on hover
+            scroller.hover(function () {
+                tweenToNewSpeed(0);
+            }, function () {
+                tweenToNewSpeed(controller.fullSpeed);
+            });
 
-           // Scrolling management; start the automatical scrolling
-           var doScroll = function () {
-               var curX = scroller.scrollLeft();
-               var newX = curX + controller.curSpeed;
-               if (newX > fullW * 2 - viewportW)
-                   newX -= fullW;
-               scroller.scrollLeft(newX);
-           };
-           setInterval(doScroll, 20);
-           tweenToNewSpeed(controller.fullSpeed);
-       });
+            // Scrolling management; start the automatical scrolling
+            var doScroll = function () {
+                var curX = scroller.scrollLeft();
+                var newX = curX + controller.curSpeed;
+                if (newX > fullW * 2 - viewportW)
+                    newX -= fullW;
+                scroller.scrollLeft(newX);
+            };
+            setInterval(doScroll, 20);
+            tweenToNewSpeed(controller.fullSpeed);
+        });
     </script>
+    <script src="~/Scripts/eaMobi.js"></script>
+
+    @*Google Analytics*@
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-137828691-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-137828691-1');
+    </script>
+    @* EOF Google Analytics*@
 
 </body>
 

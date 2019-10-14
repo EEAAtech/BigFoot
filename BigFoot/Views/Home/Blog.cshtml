@@ -60,11 +60,11 @@
     <img src="~/Custom/Shellless.jpg" id="bg" alt="">
     <img src="~/Custom/shell.png" style="position:fixed; right:-38px; bottom: -45px;">
     <div id="TopBody" class="container-fluid">
-        <div id="pricing " class="container-fluid pots" style="margin-right: 130px; margin-left: 40px;">            
+        <div id="pricing" class="container-fluid pots" style="background-color: #82663A;">
             <iframe src="http://blog.bigfootgoa.com/" width=100% height=800></iframe>
         </div>
 
-        
+
 
         <footer>
             <p>&copy; @DateTime.Now.Year - Erryl Alvares</p>
@@ -72,7 +72,7 @@
     </div>
     <div class="featurette-divider">
     </div>
-
+    
     @Scripts.Render("~/bundles/bootstrap")
     @*@RenderSection("scripts", required: false)*@
 
@@ -136,13 +136,13 @@
                     .fail(function () {
                         alert("Kindly enter valid data in all the fields");
                     });
-                
+
             });
 
         })
 
     </script>
-
+    <script src="~/Scripts/eaMobi.js"></script>
 
 </body>
 </html>
